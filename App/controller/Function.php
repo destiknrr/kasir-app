@@ -126,3 +126,67 @@ function countRowsBarang(){
     $row = mysqli_fetch_assoc($result);
     return $row['total_rows'];
 }
+
+// Fungsi Tambah Pelanggan
+function tambahPelanggan($nama_pelanggan, $no_hp, $alamat, $email){
+    include "Database.php";
+
+    // Masukkan data ke database
+    $query_insert = mysqli_query($conn, "INSERT INTO pelanggan (nama_pelanggan, no_hp, alamat, email) VALUES ('$nama_pelanggan', '$no_hp', '$alamat', '$email')");
+    if (!$query_insert) {
+        die("Query error: " . mysqli_error($conn));
+    } else {
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-pelanggan';</script>";
+        exit;
+    }
+}
+
+// Fungsi Ambil Data Pelanggan
+function getDataPelanggan(){
+    include "Database.php";
+    $result = mysqli_query($conn, "SELECT * FROM pelanggan");
+    if (!$result) {
+        die("Query error: " . mysqli_error($conn));
+    }
+
+    $array = [];
+    while ($pelanggan = mysqli_fetch_array($result)) {
+        $array[] = $pelanggan;
+    }
+    return $array;
+}
+
+// Fungsi Edit Pelanggan
+function editPelanggan($id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email){
+    include "Database.php";
+    $query = mysqli_query($conn, "UPDATE pelanggan SET nama_pelanggan='$nama_pelanggan', no_hp='$no_hp', alamat='$alamat', email='email' WHERE id_pelanggan='$id_pelanggan'");
+    if (!$query) {
+        die("Query error: " . mysqli_error($conn));
+    } else {
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-barang';</script>";
+        exit;
+    }
+}
+
+// Fungsi Hapus Pelanggan
+function hapusPelanggan($id_pelanggan){
+    include "Database.php";
+    $query = mysqli_query($conn, "DELETE FROM pelanggan WHERE id_pelanggan='$id_pelanggan'");
+    if (!$query) {
+        die("Query error: " . mysqli_error($conn));
+    } else {
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-pelanggan';</script>";
+        exit;
+    }
+}
+
+// Fungsi Hitung Jumlah Baris Pelanggan
+function countRowsPelanggan(){
+    include "Database.php";
+    $result = mysqli_query($conn, "SELECT COUNT(*) AS total_rows FROM pelanggan");
+    if (!$result) {
+        die("Query error: " . mysqli_error($conn));
+    }
+    $row = mysqli_fetch_assoc($result);
+    return $row['total_rows'];
+}
