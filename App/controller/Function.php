@@ -228,6 +228,8 @@ function countRowsPelanggan(){
     return $row['total_rows'];
 }
 
+
+
 // Fungsi Transaksi
 // Fungsi Tambah Transaksi
 function tambahTransaksi($tanggal, $total_pembelian, $kembalian, $bayar, $keterangan){
@@ -281,5 +283,77 @@ function hapusTransaksi($id_transaksi){
         exit;
     }
 }
+
+// Fungsi Hitung Omset Penjualan
+function hitungOmsetPenjualan(){
+    include "Database.php";
+    $result = mysqli_query($conn, "SELECT SUM(total_pembelian) AS omset FROM transaksi");
+    if (!$result) {
+        die("Query error: " . mysqli_error($conn));
+    }
+    $row = mysqli_fetch_assoc($result);
+    return $row['omset'];
+}
+
+// Fungsi Hitung Pendapatan Bersih
+function hitungPendapatanBersih(){
+    include "Database.php";
+    
+    // Menghitung total harga jual dari detail transaksi yang terhubung dengan tabel barang
+    $resultTotalHargaJual = mysqli_query($conn, "SELECT SUM(barang.harga_jual * detail_transaksi.qty) AS total_harga_jual FROM detail_transaksi INNER JOIN barang ON detail_transaksi.id_barang = barang.id_barang");
+    if (!$resultTotalHargaJual) {
+        die("Query error: " . mysqli_error($conn));
+    }
+    $rowTotalHargaJual = mysqli_fetch_assoc($resultTotalHargaJual);
+    $totalHargaJual = $rowTotalHargaJual['total_harga_jual'];
+
+    // Menghitung total harga beli dari detail transaksi yang terhubung dengan tabel barang
+    $resultTotalHargaBeli = mysqli_query($conn, "SELECT SUM(barang.harga_beli * detail_transaksi.qty) AS total_harga_beli FROM detail_transaksi INNER JOIN barang ON detail_transaksi.id_barang = barang.id_barang");
+    if (!$resultTotalHargaBeli) {
+        die("Query error: " . mysqli_error($conn));
+    }
+    $rowTotalHargaBeli = mysqli_fetch_assoc($resultTotalHargaBeli);
+    $totalHargaBeli = $rowTotalHargaBeli['total_harga_beli'];
+
+    // Menghitung pendapatan bersih
+    $pendapatanBersih = $totalHargaJual - $totalHargaBeli;
+    
+    return $pendapatanBersih;
+}
+
+// Fungsi untuk mengambil detail transaksi berdasarkan id transaksi
+function getDetailTransaksiByTransaksiId($id_transaksi){
+    include "Database.php";
+    $query = "SELECT detail_transaksi.id_detail_transaksi, detail_transaksi.id_barang, barang.nama_barang, detail_transaksi.qty, barang.harga_jual, (detail_transaksi.qty * barang.harga_jual) AS total FROM detail_transaksi INNER JOIN barang ON detail_transaksi.id_barang = barang.id_barang WHERE detail_transaksi.id_transaksi = $id_transaksi";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        die("Query error: " . mysqli_error($conn));
+    }
+
+    $detailTransaksi = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $detailTransaksi[] = $row;
+    }
+    return $detailTransaksi;
+}
+
+// fungsi cetak nota
+function cetakNota($id_transaksi) {
+    include "Database.php";
+    // Query untuk mendapatkan data transaksi
+    $query_transaksi = mysqli_query($conn, "SELECT * FROM transaksi WHERE id_transaksi='$id_transaksi'");
+    $transaksi = mysqli_fetch_assoc($query_transaksi);
+
+    // Query untuk mendapatkan detail transaksi
+    $query_detail = mysqli_query($conn, "SELECT detail_transaksi.*, barang.nama_barang, barang.harga_jual FROM detail_transaksi INNER JOIN barang ON detail_transaksi.id_barang = barang.id_barang WHERE id_transaksi='$id_transaksi'");
+    $detailTransaksi = [];
+    while ($row = mysqli_fetch_assoc($query_detail)) {
+        $detailTransaksi[] = $row;
+    }
+
+    // Include view untuk cetak nota
+    include "../view/cetaknota.php";
+}
+
 
 

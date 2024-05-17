@@ -120,5 +120,9 @@ if($url == "login"){
 } else if($url == "edit-transaksi"){
     SessionCheck();
     include "../view/edit-transaksi.php";
+} else if($url == "print-nota"){
+    SessionCheck();
+    $id_transaksi = $_GET['id'];
+    cetakNota($id_transaksi);
 }
 ?>

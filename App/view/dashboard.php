@@ -55,7 +55,7 @@
                     <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Omset <i class="mdi mdi-chart-line mdi-24px float-end"></i>
                     </h4>
-                    <h2 class="mb-5">$ 15,0000</h2>
+                    <h2 class="mb-5"><?= "Rp. " . number_format(hitungOmsetPenjualan());?></h2>
                     <h6 class="card-text">Increased by 60%</h6>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
                     <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Total Pelanggan <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
                     </h4>
-                    <h2 class="mb-5">45,6334</h2>
+                    <h2 class="mb-5"><?= countRowsPelanggan();?></h2>
                     <h6 class="card-text">Decreased by 10%</h6>
                   </div>
                 </div>
@@ -77,7 +77,7 @@
                     <img src="../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Bersih <i class="mdi mdi-diamond mdi-24px float-end"></i>
                     </h4>
-                    <h2 class="mb-5">95,5741</h2>
+                    <h2 class="mb-5"><?= "Rp. " . number_format(hitungPendapatanBersih()); ?></h2>
                     <h6 class="card-text">Increased by 5%</h6>
                   </div>
                 </div>

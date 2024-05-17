@@ -92,56 +92,61 @@
                                     <td><?php echo $transaksi['bayar']; ?></td>
                                     <td><?php echo $transaksi['keterangan']; ?></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit-Transaksi-<?php echo $transaksi['id_transaksi']; ?>"><i class="mdi mdi-pencil"></i></a>
+                                        <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detail-Transaksi-<?php echo $transaksi['id_transaksi']; ?>"><i class="mdi mdi-eye"></i></a>
                                         <a href="Controller.php?u=del-data-transaksi&id=<?php echo $transaksi['id_transaksi']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?');"><i class="mdi mdi-delete"></i></a>
 
-                                        <!-- Modal Edit Transaksi -->
-                                        <div class="modal fade" id="edit-Transaksi-<?php echo $transaksi['id_transaksi']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editTransaksiLabel" aria-hidden="true">
+                                        <!-- Modal Detail Transaksi -->
+                                        <div class="modal fade" id="detail-Transaksi-<?php echo $transaksi['id_transaksi']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detailTransaksiLabel-<?php echo $transaksi['id_transaksi']; ?>" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editTransaksiLabel">Edit Data Transaksi</h5>
+                                                        <h5 class="modal-title" id="detailTransaksiLabel-<?php echo $transaksi['id_transaksi']; ?>">Detail Transaksi #<?php echo $transaksi['id_transaksi']; ?></h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="Controller.php" method="post">
-                                                            <input type="hidden" name="id_transaksi" value="<?php echo $transaksi['id_transaksi']; ?>">
-                                                            <div class="mb-3">
-                                                                <label for="tanggal" class="form-label">Tanggal</label>
-                                                                <input type="date" class="form-control" name="tanggal" value="<?php echo $transaksi['tanggal']; ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="total_pembelian" class="form-label">Total Pembelian</label>
-                                                                <input type="text" class="form-control" name="total_pembelian" value="<?php echo $transaksi['total_pembelian']; ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="kembalian" class="form-label">Kembalian</label>
-                                                                <input type="text" class="form-control" name="kembalian" value="<?php echo $transaksi['kembalian']; ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="bayar" class="form-label">Bayar</label>
-                                                                <input type="text" class="form-control" name="bayar" value="<?php echo $transaksi['bayar']; ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="keterangan" class="form-label">Keterangan</label>
-                                                                <input type="text" class="form-control" name="keterangan" value="<?php echo $transaksi['keterangan']; ?>" required>
-                                                            </div>
+                                                        <p>Tanggal Pembelian: <?php echo $transaksi['tanggal']; ?></p>
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#ID Barang</th>
+                                                                    <th>Nama Barang</th>
+                                                                    <th>Qty</th>
+                                                                    <th>Harga Jual</th>
+                                                                    <th>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                $detailTransaksi = getDetailTransaksiByTransaksiId($transaksi['id_transaksi']);
+                                                                foreach ($detailTransaksi as $detail) {
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?php echo $detail['id_barang']; ?></td>
+                                                                        <td><?php echo $detail['nama_barang']; ?></td>
+                                                                        <td><?php echo $detail['qty']; ?></td>
+                                                                        <td><?php echo $detail['harga_jual']; ?></td>
+                                                                        <td><?php echo $detail['total']; ?></td>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                        <p>Pembayaran: <?php echo $transaksi['bayar']; ?></p>
+                                                        <p>Kembalian: <?php echo $transaksi['kembalian']; ?></p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                                                        <button type="submit" class="btn btn-primary" name="edit-transaksi">Simpan</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                        <a href="Controller.php?u=print-nota&id=<?php echo $transaksi['id_transaksi']; ?>" class="btn btn-primary">Print Nota</a>
                                                     </div>
-                                                        </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- End Modal Edit Transaksi -->
+                                        <!-- End Modal Detail Transaksi -->
                                     </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
                     </table>
-                            
+     
                 </div>
 
             </div>
