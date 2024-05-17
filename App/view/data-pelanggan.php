@@ -67,78 +67,72 @@
                     </a>
                 </p>
                 <div class="table-responsive">
-                    <!-- data barang load -->
+                    <!-- data Pelanggan load -->
                     <table id="demo-table">
                         <thead>
                             <tr>
                                 <th>
-                                <b>#ID Barang</b>
+                                <b>#ID Pelanggan</b>
                                 </th>
-                                <th>Nama Barang</th>
-                                <th>Merk</th>
-                                <th>Harga Beli</th>
-                                <th>Harga Jual</th>
-                                <th>Stok</th>
+                                <th>Nama Pelanggan</th>
+                                <th>No. HP</th>
+                                <th>Alamat</th>
+                                <th>Email</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php
-                            $dataBarang = getDataBarang();
-                            foreach ($dataBarang as $barang) {
+                            $dataPelanggan = getDataPelanggan();
+                            foreach ($dataPelanggan as $pelanggan) {
                             ?>
                                 <tr>
-                                    <td><?php echo $barang['id_barang']; ?></td>
-                                    <td><?php echo $barang['nama_barang']; ?></td>
-                                    <td><?php echo $barang['merk']; ?></td>
-                                    <td><?php echo $barang['harga_beli']; ?></td>
-                                    <td><?php echo $barang['harga_jual']; ?></td>
-                                    <td><?php echo $barang['stok']; ?></td>
+                                    <td><?php echo $pelanggan['id_pelanggan']; ?></td>
+                                    <td><?php echo $pelanggan['nama_pelanggan']; ?></td>
+                                    <td><?php echo $pelanggan['no_hp']; ?></td>
+                                    <td><?php echo $pelanggan['alamat']; ?></td>
+                                    <td><?php echo $pelanggan['email']; ?></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit-barang-<?php echo $barang['id_barang']; ?>"><i class="mdi mdi-pencil"></i></a>
-                                        <a href="Controller.php?u=del-data-barang&id=<?php echo $barang['id_barang']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?');"><i class="mdi mdi-delete"></i></a>
+                                        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit-Pelanggan-<?php echo $pelanggan['id_pelanggan']; ?>"><i class="mdi mdi-pencil"></i></a>
+                                        <a href="Controller.php?u=del-data-Pelanggan&id=<?php echo $pelanggan['id_pelanggan']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?');"><i class="mdi mdi-delete"></i></a>
 
-                                        <!-- Modal Edit Barang -->
-                                        <div class="modal fade" id="edit-barang-<?php echo $barang['id_barang']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editBarangLabel" aria-hidden="true">
+                                        <!-- Modal Edit Pelanggan -->
+                                        <div class="modal fade" id="edit-Pelanggan-<?php echo $pelanggan['id_pelanggan']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editPelangganLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editBarangLabel">Edit Data Barang</h5>
+                                                        <h5 class="modal-title" id="editPelangganLabel">Edit Data Pelanggan</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="Controller.php" method="post">
-                                                            <input type="hidden" name="id_barang" value="<?php echo $barang['id_barang']; ?>">
+                                                            <input type="hidden" name="id_pelanggan" value="<?php echo $pelanggan['id_pelanggan']; ?>">
                                                             <div class="mb-3">
-                                                                <label for="nama_barang" class="form-label">Nama Barang</label>
-                                                                <input type="text" class="form-control" name="nama_barang" value="<?php echo $barang['nama_barang']; ?>" required>
+                                                                <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
+                                                                <input type="text" class="form-control" name="nama_pelanggan" value="<?php echo $pelanggan['nama_pelanggan']; ?>" required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="merk" class="form-label">Merk</label>
-                                                                <input type="text" class="form-control" name="merk" value="<?php echo $barang['merk']; ?>" required>
+                                                                <label for="no_hp" class="form-label">No HP</label>
+                                                                <input type="text" class="form-control" name="no_hp" value="<?php echo $pelanggan['no_hp']; ?>" required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="harga_beli" class="form-label">Harga Beli</label>
-                                                                <input type="text" class="form-control" name="harga_beli" value="<?php echo $barang['harga_beli']; ?>" required>
+                                                                <label for="alamat" class="form-label">Alamat</label>
+                                                                <input type="text" class="form-control" name="alamat" value="<?php echo $pelanggan['alamat']; ?>" required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="harga_jual" class="form-label">Harga Jual</label>
-                                                                <input type="text" class="form-control" name="harga_jual" value="<?php echo $barang['harga_jual']; ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="stok" class="form-label">Stok</label>
-                                                                <input type="text" class="form-control" name="stok" value="<?php echo $barang['stok']; ?>" required>
+                                                                <label for="email" class="form-label">Email</label>
+                                                                <input type="text" class="form-control" name="email" value="<?php echo $pelanggan['email']; ?>" required>
                                                             </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                                                        <button type="submit" class="btn btn-primary" name="edit-barang">Simpan</button>
+                                                        <button type="submit" class="btn btn-primary" name="edit-Pelanggan">Simpan</button>
                                                     </div>
                                                         </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- End Modal Edit Barang -->
+                                        <!-- End Modal Edit Pelanggan -->
                                     </td>
                                 </tr>
                             <?php } ?>
