@@ -7,7 +7,15 @@ if(isset($_POST['login-admin'])){
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     LoginAdmin($username, $password);
-} else if(isset($_POST['tambah-pelanggan'])){
+} if(isset($_POST['ubah-akun-admin'])){
+    include "Database.php";
+    $id_admin = mysqli_real_escape_string($conn, $_POST['id_admin']); 
+    $old_password = mysqli_real_escape_string($conn, $_POST['old_password']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $nama_admin = mysqli_real_escape_string($conn, $_POST['nama_admin']);
+    ubahAkunAdmin($id_admin, $old_password, $username, $password, $nama_admin);
+} else if(isset($_POST['tambah-data-pelanggan'])){
     include "Database.php";
     $nama_pelanggan = mysqli_real_escape_string($conn, $_POST['nama_pelanggan']);
     $no_hp = mysqli_real_escape_string($conn, $_POST['no_hp']);

@@ -31,6 +31,42 @@ function LoginAdmin($username, $password) {
     }
 }
 
+// Fungsi Ubah Akun Admin
+function ubahAkunAdmin($id_admin, $old_password, $username, $password, $nama_admin){
+    include "Database.php";
+    
+    // Verifikasi password lama
+    $query = mysqli_query($conn, "SELECT password FROM admin WHERE id_admin='$id_admin'");
+    $result = mysqli_fetch_assoc($query);
+
+    if (md5($old_password) == $result['password']) {
+        // Tentukan apakah password baru diisi atau tidak
+        if (!empty($password)) {
+            // Enkripsi password baru menggunakan MD5
+            $hashed_password = md5($password);
+        } else {
+            // Gunakan password lama
+            $hashed_password = $result['password'];
+        }
+        
+        // Update data di database
+        $query_update = mysqli_query($conn, "UPDATE admin SET username='$username', password='$hashed_password', nama_admin='$nama_admin' WHERE id_admin='$id_admin'");
+        
+        if (!$query_update) {
+            die("Query error: " . mysqli_error($conn));
+        } else {
+            // Update session data
+            $_SESSION['username'] = $username;
+            $_SESSION['nama_admin'] = $nama_admin;
+            
+            echo "<script>window.location='$_SERVER[PHP_SELF]?u=logout';</script>";
+            exit;
+        }
+    } else {
+        echo "<script>alert('Password lama salah!');window.location='$_SERVER[PHP_SELF]?u=home';</script>";
+    }
+}
+
 // Fungsi Periksa Session Login 
 function LoginSessionCheck(){
     session_start();
@@ -141,6 +177,7 @@ function tambahPelanggan($nama_pelanggan, $no_hp, $alamat, $email){
     }
 }
 
+
 // Fungsi Ambil Data Pelanggan
 function getDataPelanggan(){
     include "Database.php";
@@ -159,11 +196,11 @@ function getDataPelanggan(){
 // Fungsi Edit Pelanggan
 function editPelanggan($id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email){
     include "Database.php";
-    $query = mysqli_query($conn, "UPDATE pelanggan SET nama_pelanggan='$nama_pelanggan', no_hp='$no_hp', alamat='$alamat', email='email' WHERE id_pelanggan='$id_pelanggan'");
+    $query = mysqli_query($conn, "UPDATE pelanggan SET nama_pelanggan='$nama_pelanggan', no_hp='$no_hp', alamat='$alamat', email='$email' WHERE id_pelanggan='$id_pelanggan'");
     if (!$query) {
         die("Query error: " . mysqli_error($conn));
     } else {
-        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-barang';</script>";
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-pelanggan';</script>";
         exit;
     }
 }
@@ -190,3 +227,59 @@ function countRowsPelanggan(){
     $row = mysqli_fetch_assoc($result);
     return $row['total_rows'];
 }
+
+// Fungsi Transaksi
+// Fungsi Tambah Transaksi
+function tambahTransaksi($tanggal, $total_pembelian, $kembalian, $bayar, $keterangan){
+    include "Database.php";
+
+    // Masukkan data ke database
+    $query_insert = mysqli_query($conn, "INSERT INTO transaksi (tanggal, total_pembelian, kembalian, bayar, keterangan) VALUES ('$tanggal', '$total_pembelian', '$kembalian', '$bayar', '$keterangan')");
+    if (!$query_insert) {
+        die("Query error: " . mysqli_error($conn));
+    } else {
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-transaksi';</script>";
+        exit;
+    }
+}
+
+// Fungsi Ambil Data Transaksi
+function getDataTransaksi(){
+    include "Database.php";
+    $result = mysqli_query($conn, "SELECT * FROM transaksi");
+    if (!$result) {
+        die("Query error: " . mysqli_error($conn));
+    }
+
+    $array = [];
+    while ($transaksi = mysqli_fetch_array($result)) {
+        $array[] = $transaksi;
+    }
+    return $array;
+}
+
+// Fungsi Edit Transaksi
+function editTransaksi($id_transaksi, $tanggal, $total_pembelian, $kembalian, $bayar, $keterangan){
+    include "Database.php";
+    $query = mysqli_query($conn, "UPDATE transaksi SET tanggal='$tanggal', total_pembelian='$total_pembelian', kembalian='$kembalian', bayar='$bayar', keterangan='$keterangan' WHERE id_transaksi='$id_transaksi'");
+    if (!$query) {
+        die("Query error: " . mysqli_error($conn));
+    } else {
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-transaksi';</script>";
+        exit;
+    }
+}
+
+// Fungsi Hapus Transaksi
+function hapusTransaksi($id_transaksi){
+    include "Database.php";
+    $query = mysqli_query($conn, "DELETE FROM transaksi WHERE id_transaksi='$id_transaksi'");
+    if (!$query) {
+        die("Query error: " . mysqli_error($conn));
+    } else {
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-transaksi';</script>";
+        exit;
+    }
+}
+
+
