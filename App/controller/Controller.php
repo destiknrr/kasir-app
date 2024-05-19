@@ -125,4 +125,8 @@ if($url == "login"){
     $id_transaksi = $_GET['id'];
     cetakNota($id_transaksi);
 }
+else if($url == "transaksi"){
+    SessionCheck();
+    include "../view/transaksi.php";
+}
 ?>
