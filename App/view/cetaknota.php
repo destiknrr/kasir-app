@@ -14,6 +14,9 @@
             padding: 20px;
             border: 1px solid #ddd;
         }
+        .nota h4 {
+            text-align: center;
+        }
         .nota h2 {
             text-align: center;
             margin-bottom: 20px;
@@ -37,7 +40,9 @@
 </head>
 <body>
     <div class="nota">
-        <h2>Nota Transaksi</h2>
+        <h2> DigitalDreams</h2>
+        <h4> JL. Mugarsari, Tamansari, Kota Tasikmallaya </h4>
+        <h3>Nota Transaksi</h3>
         <p>ID Transaksi: <?php echo $transaksi['id_transaksi']; ?></p>
         <p>Tanggal: <?php echo $transaksi['tanggal']; ?></p>
         <table>
