@@ -51,10 +51,77 @@
                 </ul>
               </nav>
             </div>
+            <div class="card rounded-5">
+                <div class="card-body">
+                    <h4 class = "card-title"> Transaksi</h4>
+                    <div class="row">
+                        <div class = "col-4 " >
+                            <label for = "tanggal">Tanggal </label>
+                        </div>
+                            <div class="col-8">
+                            <input type="date" class="form-control" value="<?= date('Y-m-d');?>" name="tanggal_transaksi" readonly>
+
+                            </div>
+                        <div class="col-4 mt-4">
+                            <label for="nama_pelanggan">Pilih Pelanggan :</label>
+                        </div>
+                        <div class="col-8 mt-4">
+                            <select class="form-select" name="id_pelanggan">
+                                <?php
+                                $data_pelanggan = getDataPelanggan();
+                                foreach($data_pelanggan as $fetch_data){
+                                ?>
+                                <option value="<?= $fetch_data['id_pelanggan'];?>"><?= $fetch_data['nama_pelanggan']; ?></option>
+                                <?php } ?>
+                                </select>
+                        </div>
+
+
+                        <div class="col-12 mt-4">
+                            <div class="table-responsive">
+                                    <table class="table">
+                                    <thead>    
+                                        <tr>
+                                        <th>
+                                        <b>#ID Barang</b>
+                                        </th>
+                                        <th>Nama Barang</th>
+                                        <th>Merk</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
+                                        <th>Stok</th>
+                                        <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $data_barang=getDataBarang();
+                                        foreach($data_barang as $fetch_data_barang){
+                                            
+                                        ?>
+                                        <tr>
+                                            <td><?= $fetch_data_barang['id_barang'];?></td>
+                                            <td><?= $fetch_data_barang['nama_barang'];?></td>
+                                            <td><?= $fetch_data_barang['merk'];?></td>
+                                            <td><?= "Rp " . number_format($fetch_data_barang['harga_beli']);?></td>
+                                            <td><?= "Rp " . number_format($fetch_data_barang['harga_jual']);?></td>
+                                            <td><?= $fetch_data_barang['stok'];?></td>
+                                            <td>
+                                            <a href="" class="btn btn-info btn-sm rounded-pill"><i class="mdi mdi-plus"></i></a>
+                                            </td>
+                                        </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             
-    <div class="row card rounded-5">
+            </div>
+    <div class="row card rounded-5 mt-5">
             <div class="card-body">
-                <h4 class="card-title">Data Transaksi</h4>
+                <h4 class="card-title">Transaksi</h4>
                 <p class="card-description">
                     Berikut adalah data Transaksi. 
                     <br><br>
