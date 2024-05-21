@@ -55,7 +55,7 @@ if(isset($_POST['login-admin'])){
     $bayar = mysqli_real_escape_string($conn, $_POST['bayar']);
     $keterangan = mysqli_real_escape_string($conn, $_POST['keterangan']);
     $id_transaksi = tambahTransaksi($tanggal, $total_pembelian, $kembalian, $bayar, $keterangan);
-
+    
     // Loop untuk menambahkan detail transaksi
     foreach($_POST['detail_transaksi'] as $detail) {
         $id_barang = mysqli_real_escape_string($conn, $detail['id_barang']);
