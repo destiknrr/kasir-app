@@ -31,7 +31,7 @@
                   <h2>Kasir App</h2>
                 </div>
                 <h4>Silahkan login terlebih dahulu</h4>
-                <h6 class="font-weight-light">Masukan ussernam dan password</h6>
+                <h6 class="font-weight-light">Masukan username dan password</h6>
                 <form class="pt-3" action="Controller.php" method="post">
                   <div class="form-group">
                     <input type="text" name="username" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
@@ -42,18 +42,12 @@
                   <div class="mt-3 d-grid gap-2">
                     <button type="submit" name="login-admin" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</a>
                   </div>
-                  <div class="my-2 d-flex justify-content-between align-items-center">
+                  <!-- <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="form-check">
                       <label class="form-check-label text-muted">
                         <input type="checkbox" class="form-check-input"> Keep me signed in </label>
                     </div>
-                    <a href="#" class="auth-link text-primary">Forgot password?</a>                  </div>
-                  <div class="mb-2 d-grid gap-2">
-                    <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                      <i class="mdi mdi-facebook me-2"></i>Connect using facebook </button>
-                  </div>
-                  <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.html" class="text-primary">Create</a>
-                  </div>
+                    <a href="#" class="auth-link text-primary">Forgot password?</a>                  </div> -->
                 </form>
               </div>
             </div>

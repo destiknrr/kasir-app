@@ -45,8 +45,8 @@
               <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="transaksi-baru">Transaksi Baru</a>
-                    <a class="nav-link" href="<?= $_SERVER['PHP_SELF'] . '?u=data-pelanggan'; ?>">Data Transaksi</a>
+                    <a class="nav-link" href="<?= $_SERVER['PHP_SELF'] . '?u=transaksi'; ?>">Transaksi Baru</a>
+                    <a class="nav-link" href="<?= $_SERVER['PHP_SELF'] . '?u=data-transaksi'; ?>">Data Transaksi</a>
                   </li>
                 </ul>
               </div>
@@ -60,7 +60,7 @@
               <div class="collapse" id="akun">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="ubah-akun">Ubah Akun</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#ubah-akun-admin">Ubah Akun</a>
                     <a class="nav-link" href="<?= $_SERVER['PHP_SELF'] . '?u=logout'; ?>">Logout</a>
                   </li>
                 </ul>
