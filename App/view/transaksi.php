@@ -53,20 +53,23 @@
             </div>
             <div class="card rounded-5">
                 <div class="card-body">
+                    <div class="text-center">
                     <h4 class = "card-title"> Transaksi</h4>
+                    <hr class="text-dark">
+                    </div>
                     <div class="row">
                         <div class = "col-4 " >
                             <label for = "tanggal">Tanggal </label>
                         </div>
                             <div class="col-8">
-                            <input type="date" class="form-control" value="<?= date('Y-m-d');?>" name="tanggal_transaksi" readonly>
+                            <input type="date" class="form-control rounded-5" value="<?= date('Y-m-d');?>" name="tanggal_transaksi" readonly>
 
                             </div>
                         <div class="col-4 mt-4">
                             <label for="nama_pelanggan">Pilih Pelanggan :</label>
                         </div>
                         <div class="col-8 mt-4">
-                            <select class="form-select" name="id_pelanggan">
+                            <select class="form-select rounded-5" name="id_pelanggan">
                                 <?php
                                 $data_pelanggan = getDataPelanggan();
                                 foreach($data_pelanggan as $fetch_data){
@@ -76,42 +79,39 @@
                                 </select>
                         </div>
 
+                        <div class="col-12 text-center mt-4">
+                            <a href="#" class="btn btn-outline-info rounded-5"><i class="mdi mdi-qrcode-scan"></i> Tambah barang</a>
+                        </div>
 
                         <div class="col-12 mt-4">
                             <div class="table-responsive">
                                     <table class="table">
                                     <thead>    
                                         <tr>
-                                        <th>
-                                        <b>#ID Barang</b>
-                                        </th>
+                                        <th>#ID</th>
                                         <th>Nama Barang</th>
                                         <th>Merk</th>
-                                        <th>Harga Beli</th>
-                                        <th>Harga Jual</th>
-                                        <th>Stok</th>
-                                        <th>Aksi</th>
+                                        <th>Harga</th>
+                                        <th>QTY</th>
+                                        <th>Sub total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $data_barang=getDataBarang();
-                                        foreach($data_barang as $fetch_data_barang){
-                                            
-                                        ?>
                                         <tr>
-                                            <td><?= $fetch_data_barang['id_barang'];?></td>
-                                            <td><?= $fetch_data_barang['nama_barang'];?></td>
-                                            <td><?= $fetch_data_barang['merk'];?></td>
-                                            <td><?= "Rp " . number_format($fetch_data_barang['harga_beli']);?></td>
-                                            <td><?= "Rp " . number_format($fetch_data_barang['harga_jual']);?></td>
-                                            <td><?= $fetch_data_barang['stok'];?></td>
-                                            <td>
-                                            <a href="" class="btn btn-info btn-sm rounded-pill"><i class="mdi mdi-plus"></i></a>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </td>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4">Total</th>
+                                            <th>Rp. xxx</th>
+                                        </tr>
+                                    </tfoot>
                                     </table>
                             </div>
                         </div>
@@ -119,114 +119,7 @@
                 </div>
             
             </div>
-    <div class="row card rounded-5 mt-5">
-            <div class="card-body">
-                <h4 class="card-title">Transaksi</h4>
-                <p class="card-description">
-                    Berikut adalah data Transaksi. 
-                    <br><br>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#tambah-data-transaksi" class="btn btn-sm btn-primary rounded-5">
-                        <i class="mdi mdi-plus"></i> Tambah Transaksi Baru
-                    </a>
-                    <a href="#" onclick="location.reload();" class="btn btn-sm btn-info rounded-5">
-                        <i class="mdi mdi-refresh"></i> Refresh
-                    </a>
-                </p>
-                <div class="table-responsive">
-                    <!-- data Transaksi load -->
-                    <table id="demo-table">
-                        <thead>
-                            <tr>
-                                <th><b>#ID Transaksi</b></th>
-                                <th>Tanggal</th>
-                                <th>Total Pembelian</th>
-                                <th>Kembalian</th>
-                                <th>Bayar</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $dataTransaksi = getDataTransaksi(); // Fungsi untuk mengambil data transaksi dari database
-                            foreach ($dataTransaksi as $transaksi) {
-                            ?>
-                                <tr>
-                                    <td><?php echo $transaksi['id_transaksi']; ?></td>
-                                    <td><?php echo $transaksi['tanggal']; ?></td>
-                                    <td><?php echo $transaksi['total_pembelian']; ?></td>
-                                    <td><?php echo $transaksi['kembalian']; ?></td>
-                                    <td><?php echo $transaksi['bayar']; ?></td>
-                                    <td><?php echo $transaksi['keterangan']; ?></td>
-                                    <td>
-                                        <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detail-Transaksi-<?php echo $transaksi['id_transaksi']; ?>"><i class="mdi mdi-eye"></i></a>
-                                        <a href="Controller.php?u=del-data-transaksi&id=<?php echo $transaksi['id_transaksi']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?');"><i class="mdi mdi-delete"></i></a>
 
-                                        <!-- Modal Detail Transaksi -->
-                                        <div class="modal fade" id="detail-Transaksi-<?php echo $transaksi['id_transaksi']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detailTransaksiLabel-<?php echo $transaksi['id_transaksi']; ?>" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="detailTransaksiLabel-<?php echo $transaksi['id_transaksi']; ?>">Detail Transaksi #<?php echo $transaksi['id_transaksi']; ?></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Tanggal Pembelian: <?php echo $transaksi['tanggal']; ?></p>
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#ID Barang</th>
-                                                                    <th>Nama Barang</th>
-                                                                    <th>Qty</th>
-                                                                    <th>Harga Jual</th>
-                                                                    <th>Total</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $detailTransaksi = getDetailTransaksiByTransaksiId($transaksi['id_transaksi']);
-                                                                foreach ($detailTransaksi as $detail) {
-                                                                ?>
-                                                                    <tr>
-                                                                        <td><?php echo $detail['id_barang']; ?></td>
-                                                                        <td><?php echo $detail['nama_barang']; ?></td>
-                                                                        <td><?php echo $detail['qty']; ?></td>
-                                                                        <td><?php echo $detail['harga_jual']; ?></td>
-                                                                        <td><?php echo $detail['total']; ?></td>
-                                                                    </tr>
-                                                                <?php } ?>
-                                                            </tbody>
-                                                        </table>
-                                                        <p>Pembayaran: <?php echo $transaksi['bayar']; ?></p>
-                                                        <p>Kembalian: <?php echo $transaksi['kembalian']; ?></p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                                        <a href="Controller.php?u=print-nota&id=<?php echo $transaksi['id_transaksi']; ?>" class="btn btn-primary">Print Nota</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End Modal Detail Transaksi -->
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-     
-                </div>
-
-            </div>
-                    <!-- content-wrapper ends -->
-                    <!-- partial:partials/_footer.html -->
-                    <?php include "footer.php";?>
-                    <?php include "modals.php";?>
-                    <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
-    </div>
     </div>
     </div>
     <!-- container-scroller -->
