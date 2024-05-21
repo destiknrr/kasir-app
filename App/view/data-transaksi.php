@@ -75,7 +75,6 @@
                                 <th>Total Pembelian</th>
                                 <th>Kembalian</th>
                                 <th>Bayar</th>
-                                <th>Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -90,7 +89,6 @@
                                     <td><?php echo $transaksi['total_pembelian']; ?></td>
                                     <td><?php echo $transaksi['kembalian']; ?></td>
                                     <td><?php echo $transaksi['bayar']; ?></td>
-                                    <td><?php echo $transaksi['keterangan']; ?></td>
                                     <td>
                                         <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detail-Transaksi-<?php echo $transaksi['id_transaksi']; ?>"><i class="mdi mdi-eye"></i></a>
                                         <a href="Controller.php?u=del-data-transaksi&id=<?php echo $transaksi['id_transaksi']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?');"><i class="mdi mdi-delete"></i></a>
