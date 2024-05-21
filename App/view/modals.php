@@ -74,9 +74,9 @@
       <div class="modal-body">
         <form action="Controller.php" method="post">
           <div class="row">
-              <div class="col-8">
+              <div class="col-12 text-center">
                 <h2>Total Pembayaran</h2><br>
-                <h3>Rp <div id="total">0</div> </h3>
+                <h3> <div id="total">Rp. 0</div> </h3>
               </div>  
           </div>
           <div class="row mt-2">

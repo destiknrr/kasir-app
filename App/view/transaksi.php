@@ -180,7 +180,7 @@
             // Update total harga
             totalHarga += subTotal;
             document.getElementById('total-harga').textContent = 'Rp ' + totalHarga;
-            totalView.innerText = totalHarga;
+            totalView.innerText = "Rp. " + totalHarga;
             // Reset input pada modal
             selectBarang.selectedIndex = 0;
             document.getElementById('qty-barang').value = '';
