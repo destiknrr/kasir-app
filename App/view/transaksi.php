@@ -109,7 +109,7 @@
                       </div>
                       <!-- End modal -->
                     </div>
-          
+                                <?php include "modals.php"; ?>
                     <div class="col-12 mt-4">
                       <div class="table-responsive">
                         <table class="table" id="table-barang">
@@ -136,7 +136,7 @@
                     </div>
           
                     <div class="col-12 text-center mt-4">
-                      <a href="#" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</a>
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#pembayaran" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</a>
                     </div>
           
                   </div>
@@ -164,7 +164,8 @@
             let hargaBarang = parseInt(selectedOption.getAttribute('data-harga'));
             let qtyBarang = parseInt(document.getElementById('qty-barang').value);
             let subTotal = hargaBarang * qtyBarang;
-        
+            let totalView = document.getElementById('total');
+
             // Tambahkan barang ke tabel
             let tableBody = document.getElementById('table-barang').getElementsByTagName('tbody')[0];
             let newRow = tableBody.insertRow();
@@ -179,7 +180,7 @@
             // Update total harga
             totalHarga += subTotal;
             document.getElementById('total-harga').textContent = 'Rp ' + totalHarga;
-        
+            totalView.innerText = totalHarga;
             // Reset input pada modal
             selectBarang.selectedIndex = 0;
             document.getElementById('qty-barang').value = '';
@@ -189,6 +190,8 @@
             // modal.hide();
           });
         });
+
+
         </script>
 
     <!-- endinject -->
