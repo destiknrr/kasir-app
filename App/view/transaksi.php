@@ -181,6 +181,15 @@
             totalHarga += subTotal;
             document.getElementById('total-harga').textContent = 'Rp ' + totalHarga;
             totalView.innerText = "Rp. " + totalHarga;
+            InputBayar=document.getElementById('bayar');
+            kembaliView=document.getElementById('kembalian');
+            
+            InputBayar.addEventListener('change', () => {
+                let kembalian = parseFloat(InputBayar.value); // Pastikan input adalah angka, jika bukan, gunakan 0
+                let kembali = kembalian - totalHarga; // Hitung kembalian dengan benar
+                kembaliView.innerText = "Rp. " + kembali.toLocaleString('id-ID'); // Format angka dengan format lokal
+            });
+
             // Reset input pada modal
             selectBarang.selectedIndex = 0;
             document.getElementById('qty-barang').value = '';
@@ -192,6 +201,36 @@
         });
 
 
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const totalView = document.getElementById('total');
+            const bayarInput = document.getElementById('bayar');
+            const kembalianView = document.getElementById('kembalian');
+            const hintButtons = document.querySelectorAll('.hint-btn');
+
+            // Function to format numbers as currency
+            function formatRupiah(angka) {
+            return angka.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 });
+            }
+
+            // Event listener for hint buttons
+            hintButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                bayarInput.value = button.getAttribute('data-value');
+                calculateKembalian();
+            });
+            });
+
+            // Function to calculate change
+            function calculateKembalian() {
+            let bayar = parseInt(bayarInput.value) || 0;
+            let total = parseInt(totalView.innerText.split('Rp. ')[1].replace(/,/g, '')) || 0;
+            let kembalian = bayar - total;
+            kembalianView.innerText = formatRupiah(kembalian);
+            }
+
+            // Event listener for keyup on bayar input
+            bayarInput.addEventListener('keyup', calculateKembalian);
+        });
         </script>
 
     <!-- endinject -->
