@@ -128,7 +128,7 @@
                           <tfoot>
                             <tr>
                               <th colspan="4">Total</th>
-                              <th id="total-harga">Rp. 0</th>
+                              <th id="total-harga">Rp 0</th>
                             </tr>
                           </tfoot>
                         </table>

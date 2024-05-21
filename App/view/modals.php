@@ -73,7 +73,7 @@
             <div class="col-12 text-center">
               <h2>Total Pembayaran</h2><br>
               <hr>
-              <h3><div id="total">Rp. 0</div></h3>
+              <h3><div id="total">Rp 0</div></h3>
             </div>
           </div>
           <div class="row mt-2">
@@ -86,20 +86,21 @@
             <div class="col-12 text-center mt-2">
               <!-- Hints -->
               <div id="hints" class="d-flex justify-content-center flex-wrap">
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="50000">Rp. 50.000</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="100000">Rp. 100.000</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="200000">Rp. 200.000</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="500000">Rp. 500.000</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="1000000">Rp. 1.000.000</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="2000000">Rp. 2.000.000</button>
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="5000000">Rp. 5.000.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="50000">Rp 50.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="100000">Rp 100.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="200000">Rp 200.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="500000">Rp 500.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="1000000">Rp 1.000.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="2000000">Rp 2.000.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="5000000">Rp 5.000.000</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="10000000">Rp 10.000.000</button>
               </div>
               <!-- End hints -->
             </div>
             <div class="col-12 text-center mt-2">
               <hr>
               <h3>Kembalian</h3><br>
-              <h3 id="kembalian">Rp. 0</h3>
+              <h3 id="kembalian">Rp 0</h3>
             </div>
           </div>
       </div>
