@@ -57,7 +57,7 @@
                     <h4 class = "card-title"> Transaksi</h4>
                     <hr class="text-dark">
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class = "col-4 " >
                             <label for = "tanggal">Tanggal </label>
                         </div>
@@ -115,13 +115,18 @@
                                     </table>
                             </div>
                         </div>
+
+                        <div class="col-12 text-center mt-4">
+                            <a href="#" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</a>
+                        </div>
+
                     </div>
                 </div>
             
             </div>
 
     </div>
-    </div>
+        </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
