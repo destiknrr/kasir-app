@@ -28,7 +28,7 @@
   <body>
     <div class="container-scroller">
 
-      <!-- partial header -->
+      <!-- partial   header -->
       <?php include "header.php";?>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
