@@ -166,3 +166,25 @@
   </div>
 </div>
 <!-- End modal -->
+
+<!-- Modal Edit Profil Admin -->
+<div class="modal fade" id="ubah-akun-admin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Profil Admin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="Controller.php" method="POST">
+          <div class="mb-3">
+            <label for="nama_admin" class="form-label">Nama Admin</label>
+            <input type="text" class="form-control" id="nama_admin" name="nama_admin" value="<?php echo $nama_admin; ?>">
+          </div>
+          <button type="submit" class="btn btn-primary" name="edit-profil-admin">Simpan Perubahan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->

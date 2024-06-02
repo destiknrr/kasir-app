@@ -197,17 +197,23 @@ function getDataPelanggan(){
     return $array;
 }
 
-// Fungsi Edit Pelanggan
-function editPelanggan($id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email){
-    include "Database.php";
-    $query = mysqli_query($conn, "UPDATE pelanggan SET nama_pelanggan='$nama_pelanggan', no_hp='$no_hp', alamat='$alamat', email='$email' WHERE id_pelanggan='$id_pelanggan'");
-    if (!$query) {
-        die("Query error: " . mysqli_error($conn));
+function editPelanggan($conn, $id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email){
+    $query = mysqli_prepare($conn, "UPDATE pelanggan SET nama_pelanggan=?, no_hp=?, alamat=?, email=? WHERE id_pelanggan=?");
+    mysqli_stmt_bind_param($query, 'ssssi', $nama_pelanggan, $no_hp, $alamat, $email, $id_pelanggan);
+    mysqli_stmt_execute($query);
+
+    if (mysqli_stmt_affected_rows($query) > 0) {
+        echo "<script>alert('Data pelanggan berhasil diupdate');</script>";
     } else {
-        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-pelanggan';</script>";
-        exit;
+        echo "<script>alert('Gagal mengupdate data pelanggan');</script>";
     }
+
+    mysqli_stmt_close($query);
+    mysqli_close($conn);
+    echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-pelanggan';</script>";
+    exit;
 }
+
 
 // Fungsi Hapus Pelanggan
 function hapusPelanggan($id_pelanggan){
@@ -375,5 +381,25 @@ function cetakNota($id_transaksi) {
     include "../view/cetaknota.php";
 }
 
+// Fungsi untuk mengedit profil admin
+function editProfilAdmin($id_admin, $nama_admin) {
+    $conn = getDatabaseConnection(); // Dapatkan koneksi basis data
+
+    // Escape input untuk menghindari SQL injection
+    $nama_admin = mysqli_real_escape_string($conn, $nama_admin);
+
+    // Perbarui profil admin di basis data
+    $query = "UPDATE admin SET nama_admin='$nama_admin' WHERE id_admin=$id_admin";
+
+    if(mysqli_query($conn, $query)) {
+        echo "<script>alert('Profil berhasil diupdate');</script>";
+        echo "<script>window.location='$_SERVER[PHP_SELF]';</script>"; // Redirect ke halaman saat ini
+        exit;
+    } else {
+        echo "<script>alert('Gagal mengupdate profil');</script>";
+    }
+
+    mysqli_close($conn); // Tutup koneksi basis data
+}
 
 

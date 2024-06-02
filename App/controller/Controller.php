@@ -24,14 +24,14 @@ if(isset($_POST['ubah-akun-admin'])){
     $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     tambahPelanggan($nama_pelanggan, $no_hp, $alamat, $email);
-} else if(isset($_POST['edit-pelanggan'])){
+} else if (isset($_POST['edit-pelanggan'])) {
     include "Database.php";
     $id_pelanggan = mysqli_real_escape_string($conn, $_POST['id_pelanggan']);
     $nama_pelanggan = mysqli_real_escape_string($conn, $_POST['nama_pelanggan']);
     $no_hp = mysqli_real_escape_string($conn, $_POST['no_hp']);
     $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    editPelanggan($id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email);
+    editPelanggan($conn, $id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email);
 } else if(isset($_POST['tambah-data-barang'])){
     include "Database.php";
     $harga_beli = mysqli_real_escape_string($conn, $_POST['harga_beli']);
@@ -92,7 +92,16 @@ if(isset($_POST['ubah-akun-admin'])){
     include "Database.php";
     $id_detail_transaksi = mysqli_real_escape_string($conn, $_POST['id_detail_transaksi']);
     hapusDetailTransaksi($id_detail_transaksi);
+} else if(isset($_POST['edit-profil-admin'])){
+    $id_admin = 1; // Ganti dengan ID admin yang sesuai
+    $nama_admin = $_POST['nama_admin']; // Ambil data nama admin dari form
+
+    // Panggil fungsi editProfilAdmin dengan parameter ID admin dan nama admin
+    editProfilAdmin($id_admin, $nama_admin);
 }
+
+
+
 
 // GET Method
 if(isset($_GET['u'])){
