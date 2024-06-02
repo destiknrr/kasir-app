@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 15, 2024 at 08:22 PM
+-- Generation Time: Jun 02, 2024 at 01:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama_admin`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin Satu'),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Kasir'),
 (2, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 'Admin Dua');
 
 -- --------------------------------------------------------
@@ -62,9 +62,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `harga_beli`, `harga_jual`, `stok`, `nama_barang`, `merk`) VALUES
-(1, 15000000.00, 2000000.00, 10, 'Laptop Asus', 'Merk A'),
-(2, 20000000.00, 2500000.00, 4, 'Laptop Toshiba F', 'Merk B'),
-(3, 18000000.00, 2300000.00, 7, 'Laptop Dell', 'Merk C'),
+(1, 1500000.00, 2000000.00, 10, 'Laptop Asus', 'Merk A'),
+(2, 2000000.00, 2500000.00, 4, 'Laptop Toshiba F', 'Merk B'),
+(3, 1800000.00, 2300000.00, 7, 'Laptop Dell', 'Merk C'),
 (5, 20000000.00, 22000000.00, 2, 'Macbook Pro A', 'Apple');
 
 -- --------------------------------------------------------
@@ -87,7 +87,10 @@ CREATE TABLE `detail_transaksi` (
 INSERT INTO `detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_barang`, `qty`) VALUES
 (1, 1, 1, 2),
 (2, 1, 2, 1),
-(3, 2, 3, 1);
+(19, 26, 1, 1),
+(20, 26, 3, 1),
+(21, 27, 1, 1),
+(22, 27, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -109,7 +112,7 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_hp`, `alamat`, `email`) VALUES
 (1, 'Budi Santoso', '081234567890', 'Jl. Merdeka No. 1, Jakarta', 'budi@example.com'),
-(2, 'Ani Yulianti', '081234567891', 'Jl. Sudirman No. 2, Jakarta', 'ani@example.com');
+(2, 'Ani Yulianti', '081234567891', 'Jl. Sudirman No. 2, Jakarta 2', 'aniyuli@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -119,10 +122,11 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_hp`, `alamat`, `e
 
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
+  `id_pelanggan` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
-  `total_pembelian` decimal(10,2) NOT NULL,
-  `kembalian` decimal(10,2) NOT NULL,
-  `bayar` decimal(10,2) NOT NULL,
+  `total_pembelian` decimal(10,0) NOT NULL,
+  `kembalian` decimal(10,0) NOT NULL,
+  `bayar` decimal(10,0) NOT NULL,
   `keterangan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -130,9 +134,11 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `tanggal`, `total_pembelian`, `kembalian`, `bayar`, `keterangan`) VALUES
-(1, '2024-05-15 14:30:00', 35000000.00, 500000.00, 35500000.00, 'Pembelian Laptop untuk kantor'),
-(2, '2024-05-15 15:00:00', 18000000.00, 200000.00, 18200000.00, 'Pembelian Laptop pribadi');
+INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tanggal`, `total_pembelian`, `kembalian`, `bayar`, `keterangan`) VALUES
+(1, 0, '2024-05-15 14:30:00', 3500000, 500000, 7000000, 'Pembelian Laptop untuk kantor'),
+(2, 0, '2024-05-15 15:00:00', 2300000, 200000, 2500000, 'Pembelian Laptop pribadi'),
+(26, 2, '2024-06-02 13:42:00', 4300000, 700000, 5000000, 'asfasfasfasfasf13'),
+(27, 2, '2024-06-02 18:43:00', 6600000, 3400000, 10000000, 'asfasgafs g a');
 
 --
 -- Indexes for dumped tables
@@ -168,7 +174,8 @@ ALTER TABLE `pelanggan`
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD PRIMARY KEY (`id_transaksi`);
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `fk_id_pelanggan` (`id_pelanggan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -190,19 +197,19 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
