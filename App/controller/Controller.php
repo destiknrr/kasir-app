@@ -48,7 +48,7 @@ if(isset($_POST['ubah-akun-admin'])){
     $stok = mysqli_real_escape_string($conn, $_POST['stok']);
     $nama_barang = mysqli_real_escape_string($conn, $_POST['nama_barang']);
     $merk = mysqli_real_escape_string($conn, $_POST['merk']);
-    editBarang($id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk);
+    editBarang($conn, $id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk);
 } else if (isset($_POST['tambah-transaksi'])) {
     include "Database.php";
     
