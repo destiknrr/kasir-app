@@ -126,17 +126,15 @@ function getDataBarang(){
     return $array;
 }
 
-// edit barang
 // Fungsi Edit Barang
-function editBarang($id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk) {
-    include "Database.php";
-    $query = mysqli_query($conn, "UPDATE barang SET nama_barang='$nama_barang', harga_beli='$harga_beli', harga_jual='$harga_jual', stok='$stok', merk='$merk' WHERE id_barang='$id_barang'");
-    if (!$query) {
-        die("Query error: " . mysqli_error($conn));
-    } else {
-        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-barang';</script>";
-        exit;
-    }
+function editBarang($conn, $id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk) {
+    $query = mysqli_prepare($conn, "UPDATE barang SET nama_barang=?, harga_beli=?, harga_jual=?, stok=?, merk=? WHERE id_barang=?");
+    mysqli_stmt_bind_param($query, 'sssssi', $nama_barang, $harga_beli, $harga_jual, $stok, $merk, $id_barang);
+    mysqli_stmt_execute($query);
+    mysqli_stmt_close($query);
+    mysqli_close($conn);
+    echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-barang';</script>";
+    exit;
 }
 
 // Fungsi Hapus Barang
