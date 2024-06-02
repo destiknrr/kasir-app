@@ -40,6 +40,7 @@
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
                 <span class="menu-title">Transaksi</span>
+                <i class="menu-arrow"></i>
                 <i class="mdi mdi-barcode-scan menu-icon"></i>
               </a>
               <div class="collapse" id="icons">
@@ -55,12 +56,13 @@
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#akun" aria-expanded="false" aria-controls="akun">
                 <span class="menu-title">Akun</span>
+                <i class="menu-arrow"></i>
                 <i class="mdi mdi-account menu-icon"></i>
               </a>
               <div class="collapse" id="akun">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#ubah-akun-admin">Ubah Akun</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#ubah-akun-admin">Edit Akun</a>
                     <a class="nav-link" href="<?= $_SERVER['PHP_SELF'] . '?u=logout'; ?>">Logout</a>
                   </li>
                 </ul>

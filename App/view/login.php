@@ -27,11 +27,15 @@
           <div class="row flex-grow">
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
-                <div class="brand-logo">
-                  <h2>Kasir App</h2>
-                </div>
+                <div class="brand-logo mb-4 d-flex align-items-center">
+                  <img src="../assets/images/logo.jpeg" alt="logo" style="width: 50px; height: 50px; margin-right: 10px; border-radius: 10px;">
+                  <div>
+                    <h2 style="margin: 0;">DigitalDream</h2>
+                    <h2 style="margin: 0;">Laptop</h2>
+                  </div>
+                </div>
                 <h4>Silahkan login terlebih dahulu</h4>
-                <h6 class="font-weight-light">Masukan username dan password</h6>
+                <!-- <h6 class="font-weight-light">Masukan username dan password</h6> -->
                 <?php
                   if (isset($_GET['error']) && $_GET['error'] == 1) {
                       echo '<div class="alert alert-danger" role="alert">
@@ -47,7 +51,7 @@
                     <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                   </div>
                   <div class="mt-3 d-grid gap-2">
-                    <button type="submit" name="login-admin" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                    <button type="submit" name="login-admin" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Login</button>
                   </div>
                 </form>
               </div>
