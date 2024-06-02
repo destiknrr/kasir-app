@@ -57,100 +57,152 @@
                     <h4 class="card-title"> Transaksi</h4>
                     <hr class="text-dark">
                   </div>
-                  <form action="<?= $_SERVER['PHP_SELF'];?>" method="POST"> 
-    <div class="row mt-3">
-        <div class="col-4">
-            <label for="tanggal">Tanggal </label>
-        </div>
-        <div class="col-8">
-            <input type="date" class="form-control rounded-5" value="<?= date('Y-m-d');?>" name="tanggal_transaksi" readonly>
-        </div>
-        <div class="col-4 mt-4">
-            <label for="nama_pelanggan">Pilih Pelanggan :</label>
-        </div>
-        <div class="col-8 mt-4">
-            <select class="form-select rounded-5" name="id_pelanggan">
-                <?php
-                $data_pelanggan = getDataPelanggan();
-                foreach($data_pelanggan as $fetch_data){
-                ?>
-                <option value="<?= $fetch_data['id_pelanggan'];?>"><?= $fetch_data['nama_pelanggan']; ?></option>
-                <?php } ?>
-            </select>
-        </div>
-        
-        <div class="col-12 text-center mt-4">
-            <a href="#" class="btn btn-outline-info rounded-5" data-bs-toggle="modal" data-bs-target="#tambahkan-barang"><i class="mdi mdi-qrcode-scan"></i> Tambah barang</a>
-            
-            <!-- Modal Tambah Data Barang -->
-            <div class="modal fade" id="tambahkan-barang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Barang</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="form-transaksi"> 
+                  <input type="hidden" name="detail_transaksi" id="detail_transaksi">
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label for="tanggal">Tanggal </label>
                         </div>
-                        <div class="modal-body">
-                            <select class="form-select rounded-5" id="select-barang" data-placeholder="Choose one thing">
-                                <?php 
-                                $barang=getDataBarang();
-                                foreach ($barang as $key) {
+                        <div class="col-8">
+                            <input type="date" class="form-control rounded-5" value="<?= date('Y-m-d'); ?>" name="tanggal_transaksi" readonly>
+                        </div>
+                        <div class="col-4 mt-4">
+                            <label for="nama_pelanggan">Pilih Pelanggan :</label>
+                        </div>
+                        <div class="col-8 mt-4">
+                            <select class="form-select rounded-5" name="id_pelanggan">
+                                <?php
+                                $data_pelanggan = getDataPelanggan();
+                                foreach ($data_pelanggan as $fetch_data) {
                                 ?>
-                                <option value="<?= $key['id_barang'];?>" data-harga="<?= $key['harga_jual'];?>"><?= "#" . $key['id_barang'] . " - " . $key['nama_barang'] . " - Rp " . $key['harga_jual'];?></option>
+                                <option value="<?= htmlspecialchars($fetch_data['id_pelanggan']); ?>"><?= htmlspecialchars($fetch_data['nama_pelanggan']); ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="number" id="qty-barang" placeholder="Jumlah Barang" class="form-control mt-3 rounded-5" required>
                         </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Selesai</button>
-                            <button class="btn btn-primary rounded-pill" id="btn-tambahkan-barang" type="button"><i class="mdi mdi-plus"></i> Tambahkan</button>
+                        
+                        <div class="col-12 text-center mt-4">
+                            <a href="#" class="btn btn-outline-info rounded-5" data-bs-toggle="modal" data-bs-target="#tambahkan-barang"><i class="mdi mdi-qrcode-scan"></i> Tambah barang</a>
+                            
+                            <!-- Modal Tambah Data Barang -->
+                            <div class="modal fade" id="tambahkan-barang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Barang</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <select class="form-select rounded-5" id="select-barang" data-placeholder="Choose one thing">
+                                                <?php 
+                                                $barang = getDataBarang();
+                                                foreach ($barang as $key) {
+                                                ?>
+                                                <option value="<?= htmlspecialchars($key['id_barang']); ?>" data-harga="<?= htmlspecialchars($key['harga_jual']); ?>"><?= "#" . htmlspecialchars($key['id_barang']) . " - " . htmlspecialchars($key['nama_barang']) . " - Rp " . htmlspecialchars($key['harga_jual']); ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <input type="number" id="qty-barang" placeholder="Jumlah Barang" class="form-control mt-3 rounded-5">
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Selesai</button>
+                                            <button class="btn btn-primary rounded-pill" id="btn-tambahkan-barang" type="button"><i class="mdi mdi-plus"></i> Tambahkan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End modal -->
+                        </div>
+                        
+                        <div class="col-12 mt-4">
+                            <div class="table-responsive">
+                                <table class="table" id="table-barang">
+                                    <thead>    
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Nama Barang</th>
+                                            <th>Harga</th>
+                                            <th>QTY</th>
+                                            <th>Sub total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Barang akan ditambahkan di sini -->
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4">Total</th>
+                                            <th id="total-harga">Rp 0</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <label for="keterangan">Keterangan :</label>
+                            <textarea class="form-control rounded-5" name="keterangan" rows="3"></textarea>
+                        </div>
+
+                        <input type="hidden" name="total_pembelian" id="total_pembelian">
+                        <input type="hidden" name="detail_transaksi" id="detail_transaksi">
+
+                        <div class="col-12 text-center mt-4">
+                            <!-- Modal Bayar -->
+                    <div class="modal fade" id="pembayaran" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h2>Total Pembayaran</h2><br>
+                                            <hr>
+                                            <h3><div id="total">Rp 0</div></h3>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-3">
+                                            <label for="merk">Bayar</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <!-- Hapus required di sini -->
+                                            <input type="number" class="form-control rounded-pill" name="bayar" id="bayar">
+                                        </div>
+                                        <div class="col-12 text-center mt-2">
+                                            <!-- Hints -->
+                                            <div id="hints" class="d-flex justify-content-center flex-wrap">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="50000">Rp 50.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="100000">Rp 100.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="200000">Rp 200.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="500000">Rp 500.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="1000000">Rp 1.000.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="2000000">Rp 2.000.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="5000000">Rp 5.000.000</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm m-1 hint-btn" data-value="10000000">Rp 10.000.000</button>
+                                            </div>
+                                            <!-- End hints -->
+                                        </div>
+                                        <div class="col-12 text-center mt-2">
+                                            <hr>
+                                            <h3>Kembalian</h3><br>
+                                            <h3 id="kembalian">Rp 0</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Batalkan</button>
+                                    <button type="submit" name="tambah-transaksi" class="btn btn-primary rounded-pill" id="btn-bayar-sekarang" type="button">Bayar Sekarang</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- End modal -->
-        </div>
-        
-        <div class="col-12 mt-4">
-            <div class="table-responsive">
-                <table class="table" id="table-barang">
-                    <thead>    
-                        <tr>
-                            <th>#ID</th>
-                            <th>Nama Barang</th>
-                            <th>Harga</th>
-                            <th>QTY</th>
-                            <th>Sub total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Barang akan ditambahkan di sini -->
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="4">Total</th>
-                            <th id="total-harga">Rp 0</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <div class="col-12 mt-4">
-            <label for="keterangan">Keterangan :</label>
-            <textarea class="form-control rounded-5" name="keterangan" rows="3"></textarea>
-        </div>
-
-        <input type="hidden" name="total_pembelian" id="total_pembelian">
-        <input type="hidden" name="detail_transaksi" id="detail_transaksi">
-
-        <div class="col-12 text-center mt-4">
-            <?php include "modals.php"; ?>
-            <button data-bs-toggle="modal" data-bs-target="#pembayaran" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</button>
-        </div>
-    </div>
-</form>
-<!-- batas form -->
+                    <!-- End modal -->
+                                <a data-bs-toggle="modal" data-bs-target="#pembayaran" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</a>
+                            </div>
+                        </div>
+                </form>
                 </div>
               </div>
             </div>
@@ -165,10 +217,10 @@
     <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          let totalHarga = 0;
-        
-          document.getElementById('btn-tambahkan-barang').addEventListener('click', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        let totalHarga = 0;
+
+        document.getElementById('btn-tambahkan-barang').addEventListener('click', function() {
             let selectBarang = document.getElementById('select-barang');
             let selectedOption = selectBarang.options[selectBarang.selectedIndex];
             let idBarang = selectedOption.value;
@@ -188,62 +240,85 @@
                                   <td>${qtyBarang}</td>
                                   <td>Rp ${subTotal}</td>
                                 </tr>`;
-        
+
             // Update total harga
             totalHarga += subTotal;
             document.getElementById('total-harga').textContent = 'Rp ' + totalHarga;
             totalView.innerText = "Rp. " + totalHarga;
-            InputBayar=document.getElementById('bayar');
-            kembaliView=document.getElementById('kembalian');
-            
-            InputBayar.addEventListener('change', () => {
-                let kembalian = parseFloat(InputBayar.value); // Pastikan input adalah angka, jika bukan, gunakan 0
-                let kembali = kembalian - totalHarga; // Hitung kembalian dengan benar
-                kembaliView.innerText = "Rp. " + kembali.toLocaleString('id-ID'); // Format angka dengan format lokal
-            });
 
             // Reset input pada modal
             selectBarang.selectedIndex = 0;
             document.getElementById('qty-barang').value = '';
-        
+
+            // Perbarui input tersembunyi detail_transaksi
+            updateDetailTransaksi();
+
             // Tutup modal
             let modal = bootstrap.Modal.getInstance(document.getElementById('tambahkan-barang'));
-            // modal.hide();
-          });
+        });
+    });
+
+    // Fungsi untuk memperbarui input tersembunyi detail_transaksi
+    function updateDetailTransaksi() {
+        var tableRows = document.querySelectorAll('#table-barang tbody tr');
+        var detailTransaksi = [];
+
+        tableRows.forEach(function(row) {
+            var idBarang = row.cells[0].innerText;
+            var qty = row.cells[3].innerText;
+
+            detailTransaksi.push({
+                id_barang: idBarang,
+                qty: qty
+            });
         });
 
+        var detailTransaksiJSON = JSON.stringify(detailTransaksi);
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const totalView = document.getElementById('total');
-            const bayarInput = document.getElementById('bayar');
-            const kembalianView = document.getElementById('kembalian');
-            const hintButtons = document.querySelectorAll('.hint-btn');
+        let dtl_transaksi = document.getElementById('detail_transaksi');
+        dtl_transaksi.value = detailTransaksiJSON;
+        console.log(detailTransaksiJSON);
+        console.log(dtl_transaksi);
+    }
 
-            // Function to format numbers as currency
-            function formatRupiah(angka) {
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const totalView = document.getElementById('total');
+        const bayarInput = document.getElementById('bayar');
+        const kembalianView = document.getElementById('kembalian');
+        const hintButtons = document.querySelectorAll('.hint-btn');
+
+        // Function to format numbers as currency
+        function formatRupiah(angka) {
             return angka.toLocaleString('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 });
-            }
+        }
 
-            // Event listener for hint buttons
-            hintButtons.forEach(button => {
+        // Event listener for hint buttons
+        hintButtons.forEach(button => {
             button.addEventListener('click', () => {
                 bayarInput.value = button.getAttribute('data-value');
                 calculateKembalian();
             });
-            });
+        });
 
-            // Function to calculate change
-            function calculateKembalian() {
+        // Function to calculate change
+        function calculateKembalian() {
             let bayar = parseInt(bayarInput.value) || 0;
             let total = parseInt(totalView.innerText.split('Rp. ')[1].replace(/,/g, '')) || 0;
             let kembalian = bayar - total;
             kembalianView.innerText = formatRupiah(kembalian);
-            }
+        }
 
-            // Event listener for keyup on bayar input
-            bayarInput.addEventListener('keyup', calculateKembalian);
-        });
-        </script>
+        // Event listener for keyup on bayar input
+        bayarInput.addEventListener('keyup', calculateKembalian);
+    });
+
+    // Event listener untuk submit form
+    document.getElementById('form-transaksi').addEventListener('submit', function() {
+        // Memperbarui input tersembunyi detail_transaksi sebelum mengirimkan form
+        updateDetailTransaksi();
+    });
+</script>
+
 
     <!-- endinject -->
     <!-- Plugin js for this page -->

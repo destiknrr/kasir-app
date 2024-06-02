@@ -53,19 +53,28 @@ if(isset($_POST['ubah-akun-admin'])){
     
     $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal_transaksi']);
     $id_pelanggan = mysqli_real_escape_string($conn, $_POST['id_pelanggan']);
-    $total_pembelian = mysqli_real_escape_string($conn, $_POST['total_pembelian']);
+    $total_pembelian = floatval(mysqli_real_escape_string($conn, $_POST['total_pembelian']));
     $bayar = mysqli_real_escape_string($conn, $_POST['bayar']);
-    $kembalian = $bayar - $total_pembelian;
+    $kembalian = floatval($bayar) - floatval($total_pembelian);
     $keterangan = mysqli_real_escape_string($conn, $_POST['keterangan']);
     
     $id_transaksi = tambahTransaksi($tanggal, $id_pelanggan, $total_pembelian, $bayar, $kembalian, $keterangan);
     
-    $detail_transaksi = json_decode($_POST['detail_transaksi'], true);
-    
-    foreach ($detail_transaksi as $detail) {
-        $id_barang = mysqli_real_escape_string($conn, $detail['id_barang']);
-        $qty = mysqli_real_escape_string($conn, $detail['qty']);
-        tambahDetailTransaksi($id_transaksi, $id_barang, $qty);
+    if (isset($_POST['detail_transaksi']) && !empty($_POST['detail_transaksi'])) {
+        $detail_transaksi = json_decode($_POST['detail_transaksi'], true);
+        
+        if (is_array($detail_transaksi)) {
+            foreach ($detail_transaksi as $detail) {
+                $id_barang = mysqli_real_escape_string($conn, $detail['id_barang']);
+                $qty = mysqli_real_escape_string($conn, $detail['qty']);
+                tambahDetailTransaksi($id_transaksi, $id_barang, $qty);
+            }
+        } else {
+            echo "Detail transaksi tidak valid.";
+        }
+    } else {
+        echo "Detail transaksi tidak ditemukan.";
+        echo "<script>window.location='Controller.php?u=print-nota&id=$id_transaksi';</script>";
     }
 } else if(isset($_POST['hapus-pelanggan'])){
     include "Database.php";
@@ -86,6 +95,7 @@ if(isset($_POST['ubah-akun-admin'])){
 }
 
 // GET Method
+if(isset($_GET['u'])){
 $url = $_GET["u"];
 if($url == "login"){
     LoginSessionCheck();
@@ -133,6 +143,7 @@ if($url == "login"){
 else if($url == "transaksi"){
     SessionCheck();
     include "../view/transaksi.php";
+}
 }
 ?>
 
