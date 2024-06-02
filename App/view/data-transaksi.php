@@ -58,7 +58,7 @@
                 <p class="card-description">
                     Berikut adalah data Transaksi. 
                     <br><br>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#tambah-data-transaksi" class="btn btn-sm btn-primary rounded-5">
+                    <a href="<?= $_SERVER['PHP_SELF'] . '?u=transaksi';?>" class="btn btn-sm btn-primary rounded-5">
                         <i class="mdi mdi-plus"></i> Tambah Transaksi Baru
                     </a>
                     <a href="#" onclick="location.reload();" class="btn btn-sm btn-info rounded-5">

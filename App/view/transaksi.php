@@ -57,93 +57,105 @@
                     <h4 class="card-title"> Transaksi</h4>
                     <hr class="text-dark">
                   </div>
-                  <div class="row mt-3">
-                    <div class="col-4">
-                      <label for="tanggal">Tanggal </label>
-                    </div>
-                    <div class="col-8">
-                      <input type="date" class="form-control rounded-5" value="<?= date('Y-m-d');?>" name="tanggal_transaksi" readonly>
-                    </div>
-                    <div class="col-4 mt-4">
-                      <label for="nama_pelanggan">Pilih Pelanggan :</label>
-                    </div>
-                    <div class="col-8 mt-4">
-                      <select class="form-select rounded-5" name="id_pelanggan">
-                        <?php
-                        $data_pelanggan = getDataPelanggan();
-                        foreach($data_pelanggan as $fetch_data){
-                        ?>
-                        <option value="<?= $fetch_data['id_pelanggan'];?>"><?= $fetch_data['nama_pelanggan']; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-          
-                    <div class="col-12 text-center mt-4">
-                      <a href="#" class="btn btn-outline-info rounded-5" data-bs-toggle="modal" data-bs-target="#tambahkan-barang"><i class="mdi mdi-qrcode-scan"></i> Tambah barang</a>
-          
-                      <!-- Modal Tambah Data Barang -->
-                      <div class="modal fade" id="tambahkan-barang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Barang</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <select class="form-select rounded-5" id="select-barang" data-placeholder="Choose one thing">
+                  <form action="<?= $_SERVER['PHP_SELF'];?>" method="POST"> 
+    <div class="row mt-3">
+        <div class="col-4">
+            <label for="tanggal">Tanggal </label>
+        </div>
+        <div class="col-8">
+            <input type="date" class="form-control rounded-5" value="<?= date('Y-m-d');?>" name="tanggal_transaksi" readonly>
+        </div>
+        <div class="col-4 mt-4">
+            <label for="nama_pelanggan">Pilih Pelanggan :</label>
+        </div>
+        <div class="col-8 mt-4">
+            <select class="form-select rounded-5" name="id_pelanggan">
+                <?php
+                $data_pelanggan = getDataPelanggan();
+                foreach($data_pelanggan as $fetch_data){
+                ?>
+                <option value="<?= $fetch_data['id_pelanggan'];?>"><?= $fetch_data['nama_pelanggan']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        
+        <div class="col-12 text-center mt-4">
+            <a href="#" class="btn btn-outline-info rounded-5" data-bs-toggle="modal" data-bs-target="#tambahkan-barang"><i class="mdi mdi-qrcode-scan"></i> Tambah barang</a>
+            
+            <!-- Modal Tambah Data Barang -->
+            <div class="modal fade" id="tambahkan-barang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Tambahkan Barang</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <select class="form-select rounded-5" id="select-barang" data-placeholder="Choose one thing">
                                 <?php 
                                 $barang=getDataBarang();
                                 foreach ($barang as $key) {
                                 ?>
                                 <option value="<?= $key['id_barang'];?>" data-harga="<?= $key['harga_jual'];?>"><?= "#" . $key['id_barang'] . " - " . $key['nama_barang'] . " - Rp " . $key['harga_jual'];?></option>
                                 <?php } ?>
-                              </select>
-                              <input type="number" id="qty-barang" placeholder="Jumlah Barang" class="form-control mt-3 rounded-5" required>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                              <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Selesai</button>
-                              <button class="btn btn-primary rounded-pill" id="btn-tambahkan-barang" type="button"><i class="mdi mdi-plus"></i> Tambahkan</button>
-                            </div>
-                          </div>
+                            </select>
+                            <input type="number" id="qty-barang" placeholder="Jumlah Barang" class="form-control mt-3 rounded-5" required>
                         </div>
-                      </div>
-                      <!-- End modal -->
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Selesai</button>
+                            <button class="btn btn-primary rounded-pill" id="btn-tambahkan-barang" type="button"><i class="mdi mdi-plus"></i> Tambahkan</button>
+                        </div>
                     </div>
-                                <?php include "modals.php"; ?>
-                    <div class="col-12 mt-4">
-                      <div class="table-responsive">
-                        <table class="table" id="table-barang">
-                          <thead>    
-                            <tr>
-                              <th>#ID</th>
-                              <th>Nama Barang</th>
-                              <th>Harga</th>
-                              <th>QTY</th>
-                              <th>Sub total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <!-- Barang akan ditambahkan di sini -->
-                          </tbody>
-                          <tfoot>
-                            <tr>
-                              <th colspan="4">Total</th>
-                              <th id="total-harga">Rp 0</th>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
-                    </div>
-          
-                    <div class="col-12 text-center mt-4">
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#pembayaran" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</a>
-                    </div>
-          
-                  </div>
+                </div>
+            </div>
+            <!-- End modal -->
+        </div>
+        
+        <div class="col-12 mt-4">
+            <div class="table-responsive">
+                <table class="table" id="table-barang">
+                    <thead>    
+                        <tr>
+                            <th>#ID</th>
+                            <th>Nama Barang</th>
+                            <th>Harga</th>
+                            <th>QTY</th>
+                            <th>Sub total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Barang akan ditambahkan di sini -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">Total</th>
+                            <th id="total-harga">Rp 0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-12 mt-4">
+            <label for="keterangan">Keterangan :</label>
+            <textarea class="form-control rounded-5" name="keterangan" rows="3"></textarea>
+        </div>
+
+        <input type="hidden" name="total_pembelian" id="total_pembelian">
+        <input type="hidden" name="detail_transaksi" id="detail_transaksi">
+
+        <div class="col-12 text-center mt-4">
+            <?php include "modals.php"; ?>
+            <button data-bs-toggle="modal" data-bs-target="#pembayaran" class="btn btn-outline-success rounded-5"><i class="mdi mdi-cash"></i> Bayar Pembelian</button>
+        </div>
+    </div>
+</form>
+<!-- batas form -->
                 </div>
               </div>
             </div>
           </div>
+          
     <!-- container-scroller -->
     <!-- plugins:js -->
     <!-- Scripts -->

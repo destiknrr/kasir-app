@@ -7,7 +7,8 @@ if(isset($_POST['login-admin'])){
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     LoginAdmin($username, $password);
-} if(isset($_POST['ubah-akun-admin'])){
+}
+if(isset($_POST['ubah-akun-admin'])){
     include "Database.php";
     $id_admin = mysqli_real_escape_string($conn, $_POST['id_admin']); 
     $old_password = mysqli_real_escape_string($conn, $_POST['old_password']);
@@ -47,17 +48,21 @@ if(isset($_POST['login-admin'])){
     $nama_barang = mysqli_real_escape_string($conn, $_POST['nama_barang']);
     $merk = mysqli_real_escape_string($conn, $_POST['merk']);
     editBarang($id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk);
-} else if(isset($_POST['tambah-transaksi'])){
+} else if (isset($_POST['tambah-transaksi'])) {
     include "Database.php";
-    $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal']);
-    $total_pembelian = mysqli_real_escape_string($conn, $_POST['total_pembelian']);
-    $kembalian = mysqli_real_escape_string($conn, $_POST['kembalian']);
-    $bayar = mysqli_real_escape_string($conn, $_POST['bayar']);
-    $keterangan = mysqli_real_escape_string($conn, $_POST['keterangan']);
-    $id_transaksi = tambahTransaksi($tanggal, $total_pembelian, $kembalian, $bayar, $keterangan);
     
-    // Loop untuk menambahkan detail transaksi
-    foreach($_POST['detail_transaksi'] as $detail) {
+    $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal_transaksi']);
+    $id_pelanggan = mysqli_real_escape_string($conn, $_POST['id_pelanggan']);
+    $total_pembelian = mysqli_real_escape_string($conn, $_POST['total_pembelian']);
+    $bayar = mysqli_real_escape_string($conn, $_POST['bayar']);
+    $kembalian = $bayar - $total_pembelian;
+    $keterangan = mysqli_real_escape_string($conn, $_POST['keterangan']);
+    
+    $id_transaksi = tambahTransaksi($tanggal, $id_pelanggan, $total_pembelian, $bayar, $kembalian, $keterangan);
+    
+    $detail_transaksi = json_decode($_POST['detail_transaksi'], true);
+    
+    foreach ($detail_transaksi as $detail) {
         $id_barang = mysqli_real_escape_string($conn, $detail['id_barang']);
         $qty = mysqli_real_escape_string($conn, $detail['qty']);
         tambahDetailTransaksi($id_transaksi, $id_barang, $qty);
@@ -130,3 +135,4 @@ else if($url == "transaksi"){
     include "../view/transaksi.php";
 }
 ?>
+

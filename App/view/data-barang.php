@@ -98,47 +98,48 @@
                                         <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit-barang-<?php echo $barang['id_barang']; ?>"><i class="mdi mdi-pencil"></i></a>
                                         <a href="Controller.php?u=del-data-barang&id=<?php echo $barang['id_barang']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus data ini?');"><i class="mdi mdi-delete"></i></a>
 
-                                        <!-- Modal Edit Barang -->
-                                        <div class="modal fade" id="edit-barang-<?php echo $barang['id_barang']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editBarangLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editBarangLabel">Edit Data Barang</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="Controller.php" method="post">
-                                                            <input type="hidden" name="id_barang" value="<?php echo $barang['id_barang']; ?>">
-                                                            <div class="mb-3">
-                                                                <label for="nama_barang" class="form-label">Nama Barang</label>
-                                                                <input type="text" class="form-control" name="nama_barang" value="<?php echo $barang['nama_barang']; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="merk" class="form-label">Merk</label>
-                                                                <input type="text" class="form-control" name="merk" value="<?php echo $barang['merk']; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="harga_beli" class="form-label">Harga Beli</label>
-                                                                <input type="text" class="form-control" name="harga_beli" value="<?php echo $barang['harga_beli']; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="harga_jual" class="form-label">Harga Jual</label>
-                                                                <input type="text" class="form-control" name="harga_jual" value="<?php echo $barang['harga_jual']; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="stok" class="form-label">Stok</label>
-                                                                <input type="text" class="form-control" name="stok" value="<?php echo $barang['stok']; ?>">
-                                                            </div>
-                                                    </div>
-                                                    <div class="modal-footer mt-5">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                                                        <button type="submit" class="btn btn-primary" name="edit-barang">Simpan</button>
-                                                    </div>
-                                                        </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End Modal Edit Barang -->
+<!-- Modal Edit Barang -->
+<div class="modal fade" id="edit-barang-<?php echo $barang['id_barang']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editBarangLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBarangLabel">Edit Data Barang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="Controller.php" method="post">
+                    <input type="hidden" name="id_barang" value="<?php echo $barang['id_barang']; ?>">
+                    <div class="mb-3">
+                        <label for="nama_barang" class="form-label">Nama Barang</label>
+                        <input type="text" class="form-control" name="nama_barang" value="<?php echo $barang['nama_barang']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="merk" class="form-label">Merk</label>
+                        <input type="text" class="form-control" name="merk" value="<?php echo $barang['merk']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="harga_beli" class="form-label">Harga Beli</label>
+                        <input type="text" class="form-control" name="harga_beli" value="<?php echo $barang['harga_beli']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="harga_jual" class="form-label">Harga Jual</label>
+                        <input type="text" class="form-control" name="harga_jual" value="<?php echo $barang['harga_jual']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="stok" class="form-label">Stok</label>
+                        <input type="text" class="form-control" name="stok" value="<?php echo $barang['stok']; ?>">
+                    </div>
+            </div>
+            <div class="modal-footer mt-5">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                <button type="submit" class="btn btn-primary" name="edit-barang">Simpan</button>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal Edit Barang -->
+
                                     </td>
                                 </tr>
                             <?php } ?>

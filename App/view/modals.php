@@ -159,7 +159,7 @@
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Batalkan</button>
-        <button class="btn btn-primary rounded-pill" type="submit">Bayar Sekarang</button>
+        <button class="btn btn-primary rounded-pill" type="submit" name="tambah-transaksi">Bayar Sekarang</button>
       </div>
       </form>
     </div>

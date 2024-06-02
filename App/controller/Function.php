@@ -13,7 +13,6 @@ error_reporting(E_ALL);
 function LoginAdmin($username, $password) {
     include "Database.php";
     session_start();
-    $key = rand();
     $enc_password = md5($password);
     $query = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username' AND password='$enc_password'");
     $fetchdata = mysqli_fetch_array($query);
@@ -21,12 +20,11 @@ function LoginAdmin($username, $password) {
         $_SESSION['id_admin'] = $fetchdata['id_admin'];
         $_SESSION['username'] = $fetchdata['username'];
         $_SESSION['nama_admin'] = $fetchdata['nama_admin'];
-        $_SESSION['key'] = $key;
         $_SESSION['role'] = 'admin';
         echo "<script>window.location='$_SERVER[PHP_SELF]?u=home';</script>";
         exit;
     } else {
-        echo "<script>window.location='$_SERVER[PHP_SELF]?u=login-admin&s=failed';</script>";
+        echo "<script>window.location='$_SERVER[PHP_SELF]?u=login&error=1';</script>";
         exit;
     }
 }
@@ -128,8 +126,9 @@ function getDataBarang(){
     return $array;
 }
 
+// edit barang
 // Fungsi Edit Barang
-function editBarang($id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk){
+function editBarang($id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk) {
     include "Database.php";
     $query = mysqli_query($conn, "UPDATE barang SET nama_barang='$nama_barang', harga_beli='$harga_beli', harga_jual='$harga_jual', stok='$stok', merk='$merk' WHERE id_barang='$id_barang'");
     if (!$query) {
@@ -228,22 +227,30 @@ function countRowsPelanggan(){
     return $row['total_rows'];
 }
 
-
-
-// Fungsi Transaksi
 // Fungsi Tambah Transaksi
-function tambahTransaksi($tanggal, $total_pembelian, $kembalian, $bayar, $keterangan){
+function tambahTransaksi($tanggal, $id_pelanggan, $total_pembelian, $bayar, $kembalian, $keterangan) {
     include "Database.php";
 
-    // Masukkan data ke database
-    $query_insert = mysqli_query($conn, "INSERT INTO transaksi (tanggal, total_pembelian, kembalian, bayar, keterangan) VALUES ('$tanggal', '$total_pembelian', '$kembalian', '$bayar', '$keterangan')");
+    $query_insert = mysqli_query($conn, "INSERT INTO transaksi (tanggal, id_pelanggan, total_pembelian, bayar, kembalian, keterangan) VALUES ('$tanggal', '$id_pelanggan', '$total_pembelian', '$bayar', '$kembalian', '$keterangan')");
+    
     if (!$query_insert) {
         die("Query error: " . mysqli_error($conn));
     } else {
-        echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-transaksi';</script>";
-        exit;
+        return mysqli_insert_id($conn);
     }
 }
+
+// Fungsi Tambah Detail Transaksi
+function tambahDetailTransaksi($id_transaksi, $id_barang, $qty) {
+    include "Database.php";
+
+    $query_insert = mysqli_query($conn, "INSERT INTO detail_transaksi (id_transaksi, id_barang, qty) VALUES ('$id_transaksi', '$id_barang', '$qty')");
+    
+    if (!$query_insert) {
+        die("Query error: " . mysqli_error($conn));
+    }
+}
+
 
 // Fungsi Ambil Data Transaksi
 function getDataTransaksi(){
