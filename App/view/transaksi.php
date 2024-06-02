@@ -58,13 +58,12 @@
                     <hr class="text-dark">
                   </div>
                   <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="form-transaksi"> 
-                  <input type="hidden" name="detail_transaksi" id="detail_transaksi">
                     <div class="row mt-3">
                         <div class="col-4">
                             <label for="tanggal">Tanggal </label>
                         </div>
                         <div class="col-8">
-                            <input type="date" class="form-control rounded-5" value="<?= date('Y-m-d'); ?>" name="tanggal_transaksi" readonly>
+                            <input type="datetime-local" class="form-control rounded-5" value="<?= date('Y-m-d\TH:i'); ?>" name="tanggal_transaksi" readonly>
                         </div>
                         <div class="col-4 mt-4">
                             <label for="nama_pelanggan">Pilih Pelanggan :</label>
@@ -129,8 +128,8 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4">Total</th>
-                                            <th id="total-harga">Rp 0</th>
+                                            <th colspan="4">Total (Rp.)</th>
+                                            <th id="total-harga">0</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -143,7 +142,7 @@
                         </div>
 
                         <input type="hidden" name="total_pembelian" id="total_pembelian">
-                        <input type="hidden" name="detail_transaksi" id="detail_transaksi">
+                        <input type="hidden" name="detail_transaksi[]" id="detail_transaksi">
 
                         <div class="col-12 text-center mt-4">
                             <!-- Modal Bayar -->
@@ -243,9 +242,9 @@
 
             // Update total harga
             totalHarga += subTotal;
-            document.getElementById('total-harga').textContent = 'Rp ' + totalHarga;
+            document.getElementById('total-harga').textContent = totalHarga;
             totalView.innerText = "Rp. " + totalHarga;
-
+            
             // Reset input pada modal
             selectBarang.selectedIndex = 0;
             document.getElementById('qty-barang').value = '';
@@ -273,12 +272,14 @@
             });
         });
 
-        var detailTransaksiJSON = JSON.stringify(detailTransaksi);
-
+        // Menetapkan detailTransaksi langsung sebagai nilai dari input detail_transaksi
         let dtl_transaksi = document.getElementById('detail_transaksi');
-        dtl_transaksi.value = detailTransaksiJSON;
-        console.log(detailTransaksiJSON);
+        let totalPembelian = document.getElementById('total_pembelian');
+        dtl_transaksi.value = JSON.stringify(detailTransaksi);
+        totalPembelian.value = document.getElementById('total-harga').innerText;
+        console.log(detailTransaksi);
         console.log(dtl_transaksi);
+        console.log(totalPembelian.value);
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {

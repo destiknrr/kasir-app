@@ -282,14 +282,22 @@ function editTransaksi($id_transaksi, $tanggal, $total_pembelian, $kembalian, $b
 // Fungsi Hapus Transaksi
 function hapusTransaksi($id_transaksi){
     include "Database.php";
-    $query = mysqli_query($conn, "DELETE FROM transaksi WHERE id_transaksi='$id_transaksi'");
-    if (!$query) {
+    // Hapus detail transaksi terlebih dahulu
+    $query_detail = mysqli_query($conn, "DELETE FROM detail_transaksi WHERE id_transaksi='$id_transaksi'");
+    if (!$query_detail) {
+        die("Query error: " . mysqli_error($conn));
+    }
+
+    // Setelah menghapus detail transaksi, hapus transaksi itu sendiri
+    $query_transaksi = mysqli_query($conn, "DELETE FROM transaksi WHERE id_transaksi='$id_transaksi'");
+    if (!$query_transaksi) {
         die("Query error: " . mysqli_error($conn));
     } else {
         echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-transaksi';</script>";
         exit;
     }
 }
+
 
 // Fungsi Hitung Omset Penjualan
 function hitungOmsetPenjualan(){

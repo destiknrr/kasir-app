@@ -38,7 +38,7 @@
 <body>
     <div class="nota">
         <h2>Nota Transaksi</h2>
-        <p>ID Transaksi: <?php echo $transaksi['id_transaksi']; ?></p>
+        <p>ID Transaksi: #<?php echo $transaksi['id_transaksi']; ?></p>
         <p>Tanggal: <?php echo $transaksi['tanggal']; ?></p>
         <table>
             <thead>

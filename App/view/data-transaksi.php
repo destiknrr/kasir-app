@@ -128,8 +128,8 @@
                                                                 <?php } ?>
                                                             </tbody>
                                                         </table>
-                                                        <p>Pembayaran: <?php echo $transaksi['bayar']; ?></p>
-                                                        <p>Kembalian: <?php echo $transaksi['kembalian']; ?></p>
+                                                        <p>Pembayaran: <b>Rp  <?php echo number_format($transaksi['bayar']); ?></b></p>
+                                                        <p>Kembalian: <b>Rp <?php echo number_format($transaksi['kembalian']); ?></b></p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

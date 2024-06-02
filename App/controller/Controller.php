@@ -1,5 +1,6 @@
 <?php 
 include "Function.php";
+date_default_timezone_set('Asia/Jakarta');
 
 // POST Method
 if(isset($_POST['login-admin'])){
@@ -54,27 +55,26 @@ if(isset($_POST['ubah-akun-admin'])){
     $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal_transaksi']);
     $id_pelanggan = mysqli_real_escape_string($conn, $_POST['id_pelanggan']);
     $total_pembelian = floatval(mysqli_real_escape_string($conn, $_POST['total_pembelian']));
-    $bayar = mysqli_real_escape_string($conn, $_POST['bayar']);
-    $kembalian = floatval($bayar) - floatval($total_pembelian);
+    $bayar = floatval(mysqli_real_escape_string($conn, $_POST['bayar']));
+    $kembalian = $bayar - $total_pembelian;
     $keterangan = mysqli_real_escape_string($conn, $_POST['keterangan']);
-    
+
     $id_transaksi = tambahTransaksi($tanggal, $id_pelanggan, $total_pembelian, $bayar, $kembalian, $keterangan);
     
-    if (isset($_POST['detail_transaksi']) && !empty($_POST['detail_transaksi'])) {
-        $detail_transaksi = json_decode($_POST['detail_transaksi'], true);
+    if (isset($_POST['detail_transaksi']) && is_array($_POST['detail_transaksi'])) {
+        $detail_transaksi = $_POST['detail_transaksi'];
         
-        if (is_array($detail_transaksi)) {
-            foreach ($detail_transaksi as $detail) {
-                $id_barang = mysqli_real_escape_string($conn, $detail['id_barang']);
-                $qty = mysqli_real_escape_string($conn, $detail['qty']);
-                tambahDetailTransaksi($id_transaksi, $id_barang, $qty);
-            }
-        } else {
-            echo "Detail transaksi tidak valid.";
-        }
+    $detail_transaksi_decoded = json_decode($detail_transaksi[0], true);
+
+    foreach ($detail_transaksi_decoded as $detail) {
+        $id_barang = $detail['id_barang'];
+        $qty = $detail['qty'];
+        tambahDetailTransaksi($id_transaksi, $id_barang, $qty);
+    }
+       echo "<script>window.location='Controller.php?u=print-nota&id=$id_transaksi';</script>";
+    echo $total_pembelian;
     } else {
-        echo "Detail transaksi tidak ditemukan.";
-        echo "<script>window.location='Controller.php?u=print-nota&id=$id_transaksi';</script>";
+        echo "Detail transaksi tidak valid.";
     }
 } else if(isset($_POST['hapus-pelanggan'])){
     include "Database.php";
