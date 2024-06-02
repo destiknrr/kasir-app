@@ -131,6 +131,13 @@ function editBarang($conn, $id_barang, $nama_barang, $harga_beli, $harga_jual, $
     $query = mysqli_prepare($conn, "UPDATE barang SET nama_barang=?, harga_beli=?, harga_jual=?, stok=?, merk=? WHERE id_barang=?");
     mysqli_stmt_bind_param($query, 'sssssi', $nama_barang, $harga_beli, $harga_jual, $stok, $merk, $id_barang);
     mysqli_stmt_execute($query);
+
+    if (mysqli_stmt_affected_rows($query) > 0) {
+        echo "<script>alert('Data barang berhasil diupdate');</script>";
+    } else {
+        echo "<script>alert('Gagal mengupdate data barang');</script>";
+    }
+    
     mysqli_stmt_close($query);
     mysqli_close($conn);
     echo "<script>window.location='$_SERVER[PHP_SELF]?u=data-barang';</script>";

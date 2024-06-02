@@ -129,16 +129,18 @@
                         <label for="stok" class="form-label">Stok</label>
                         <input type="text" class="form-control" name="stok" value="<?php echo $barang['stok']; ?>">
                     </div>
-            </div>
-            <div class="modal-footer mt-5">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
-                <button type="submit" class="btn btn-primary" name="edit-barang">Simpan</button>
-            </div>
+                    <div class="modal-footer mt-5">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batalkan</button>
+                        <button type="submit" class="btn btn-primary" name="edit-barang">Simpan</button>
+                    </div>
                 </form>
+            </div>
         </div>
     </div>
 </div>
 <!-- End Modal Edit Barang -->
+
+
 
                                     </td>
                                 </tr>

@@ -40,14 +40,14 @@ if(isset($_POST['ubah-akun-admin'])){
     $nama_barang = mysqli_real_escape_string($conn, $_POST['nama_barang']);
     $merk = mysqli_real_escape_string($conn, $_POST['merk']);
     tambahBarang($nama_barang, $merk, $harga_beli, $harga_jual, $stok);
-} else if(isset($_POST['edit-barang'])){
+} else if (isset($_POST['edit-barang'])){
     include "Database.php";
     $id_barang = mysqli_real_escape_string($conn, $_POST['id_barang']);
+    $nama_barang = mysqli_real_escape_string($conn, $_POST['nama_barang']);
+    $merk = mysqli_real_escape_string($conn, $_POST['merk']);
     $harga_beli = mysqli_real_escape_string($conn, $_POST['harga_beli']);
     $harga_jual = mysqli_real_escape_string($conn, $_POST['harga_jual']);
     $stok = mysqli_real_escape_string($conn, $_POST['stok']);
-    $nama_barang = mysqli_real_escape_string($conn, $_POST['nama_barang']);
-    $merk = mysqli_real_escape_string($conn, $_POST['merk']);
     editBarang($conn, $id_barang, $nama_barang, $harga_beli, $harga_jual, $stok, $merk);
 } else if (isset($_POST['tambah-transaksi'])) {
     include "Database.php";
