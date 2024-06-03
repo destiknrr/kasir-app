@@ -136,7 +136,7 @@ function editBarang($conn, $id_barang, $nama_barang, $harga_beli, $harga_jual, $
         echo "<script>alert('Data barang berhasil diupdate');</script>";
     } else {
         echo "<script>alert('Gagal mengupdate data barang');</script>";
-    }
+    } 
     
     mysqli_stmt_close($query);
     mysqli_close($conn);
@@ -197,6 +197,7 @@ function getDataPelanggan(){
     return $array;
 }
 
+// edit pelanggan
 function editPelanggan($conn, $id_pelanggan, $nama_pelanggan, $no_hp, $alamat, $email){
     $query = mysqli_prepare($conn, "UPDATE pelanggan SET nama_pelanggan=?, no_hp=?, alamat=?, email=? WHERE id_pelanggan=?");
     mysqli_stmt_bind_param($query, 'ssssi', $nama_pelanggan, $no_hp, $alamat, $email, $id_pelanggan);
@@ -381,25 +382,20 @@ function cetakNota($id_transaksi) {
     include "../view/cetaknota.php";
 }
 
-// Fungsi untuk mengedit profil admin
-function editProfilAdmin($id_admin, $nama_admin) {
-    $conn = getDatabaseConnection(); // Dapatkan koneksi basis data
+    function ubahNamaAdmin($id_admin, $nama_admin) {
+        include "Database.php";
 
-    // Escape input untuk menghindari SQL injection
-    $nama_admin = mysqli_real_escape_string($conn, $nama_admin);
+        // Update nama_admin di database
+    $query_update = mysqli_query($conn, "UPDATE admin SET nama_admin='$nama_admin' WHERE id_admin='$id_admin'");
 
-    // Perbarui profil admin di basis data
-    $query = "UPDATE admin SET nama_admin='$nama_admin' WHERE id_admin=$id_admin";
-
-    if(mysqli_query($conn, $query)) {
-        echo "<script>alert('Profil berhasil diupdate');</script>";
-        echo "<script>window.location='$_SERVER[PHP_SELF]';</script>"; // Redirect ke halaman saat ini
-        exit;
+    if (!$query_update) {
+        die("Query error: " . mysqli_error($conn));
     } else {
-        echo "<script>alert('Gagal mengupdate profil');</script>";
+        // Update session data
+        $_SESSION['nama_admin'] = $nama_admin;
+
+        // Redirect to dashboard after update
+        echo "<script>alert('Nama admin berhasil diperbarui.'); window.location='dashboard.php';</script>";
+        exit;
     }
-
-    mysqli_close($conn); // Tutup koneksi basis data
 }
-
-

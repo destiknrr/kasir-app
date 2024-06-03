@@ -167,24 +167,25 @@
 </div>
 <!-- End modal -->
 
-<!-- Modal Edit Profil Admin -->
-<div class="modal fade" id="ubah-akun-admin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal edit profil-->
+<!-- <div class="modal fade" id="ubah-akun-admin" tabindex="-1" aria-labelledby="ubahAkunAdminLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Profil Admin</h5>
+        <h5 class="modal-title" id="ubahAkunAdminLabel">Edit Nama Admin</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="Controller.php" method="POST">
-          <div class="mb-3">
-            <label for="nama_admin" class="form-label">Nama Admin</label>
-            <input type="text" class="form-control" id="nama_admin" name="nama_admin" value="<?php echo $nama_admin; ?>">
+        <form action="controller.php" method="POST">
+          <input type="hidden" name="id_admin" value="<?php echo $_SESSION['id_admin']; ?>"> <!-- Pastikan nilai ID admin yang benar -->
+          <!-- <div class="mb-3">
+            <label for="nama_admin" class="form-label">Nama Admin Baru</label>
+            <input type="text" class="form-control" id="nama_admin" name="nama_admin" required>
           </div>
-          <button type="submit" class="btn btn-primary" name="edit-profil-admin">Simpan Perubahan</button>
+          <button type="submit" class="btn btn-primary" name="ubah-nama-admin">Simpan Perubahan</button>
         </form>
       </div>
     </div>
   </div>
-</div>
+</div> --> 
 <!-- end modal -->

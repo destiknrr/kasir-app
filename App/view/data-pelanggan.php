@@ -135,6 +135,7 @@
 </div>
 <!-- End Modal Edit Pelanggan -->
 
+
                                     </td>
                                 </tr>
                             <?php } ?>

@@ -92,16 +92,13 @@ if(isset($_POST['ubah-akun-admin'])){
     include "Database.php";
     $id_detail_transaksi = mysqli_real_escape_string($conn, $_POST['id_detail_transaksi']);
     hapusDetailTransaksi($id_detail_transaksi);
-} else if(isset($_POST['edit-profil-admin'])){
-    $id_admin = 1; // Ganti dengan ID admin yang sesuai
-    $nama_admin = $_POST['nama_admin']; // Ambil data nama admin dari form
+} else if (isset($_POST['ubah-nama-admin'])) {
+    include "Database.php";
+    $id_admin = mysqli_real_escape_string($conn, $_POST['id_admin']); 
+    $nama_admin = mysqli_real_escape_string($conn, $_POST['nama_admin']);
 
-    // Panggil fungsi editProfilAdmin dengan parameter ID admin dan nama admin
-    editProfilAdmin($id_admin, $nama_admin);
+    ubahNamaAdmin($id_admin, $nama_admin);
 }
-
-
-
 
 // GET Method
 if(isset($_GET['u'])){
