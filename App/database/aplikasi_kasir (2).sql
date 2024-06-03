@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2024 at 01:47 PM
+-- Generation Time: Jun 03, 2024 at 01:09 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama_admin`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Kasir'),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'renasya'),
 (2, 'admin2', '21232f297a57a5a743894a0e4a801fc3', 'Admin Dua');
 
 -- --------------------------------------------------------
@@ -62,10 +62,10 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `harga_beli`, `harga_jual`, `stok`, `nama_barang`, `merk`) VALUES
-(1, 1500000.00, 2000000.00, 10, 'Laptop Asus', 'Merk A'),
-(2, 2000000.00, 2500000.00, 4, 'Laptop Toshiba F', 'Merk B'),
+(1, 1500000.00, 2000000.00, 9, 'Laptop Asus', 'Merk A'),
+(2, 2000000.00, 2500000.00, 2, 'Laptop Toshiba F', 'Merk B'),
 (3, 1800000.00, 2300000.00, 7, 'Laptop Dell', 'Merk C'),
-(5, 20000000.00, 22000000.00, 2, 'Macbook Pro A', 'Apple');
+(12, 5000000.00, 5500000.00, 4, 'Macbook Air', 'Apple');
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,14 @@ INSERT INTO `detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_baran
 (19, 26, 1, 1),
 (20, 26, 3, 1),
 (21, 27, 1, 1),
-(22, 27, 3, 2);
+(22, 27, 3, 2),
+(23, 28, 1, 1),
+(25, 30, 1, 1),
+(26, 30, 1, 2),
+(27, 31, 1, 1),
+(28, 31, 3, 2),
+(29, 32, 2, 1),
+(30, 33, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -112,7 +119,9 @@ CREATE TABLE `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `no_hp`, `alamat`, `email`) VALUES
 (1, 'Budi Santoso', '081234567890', 'Jl. Merdeka No. 1, Jakarta', 'budi@example.com'),
-(2, 'Ani Yulianti', '081234567891', 'Jl. Sudirman No. 2, Jakarta 2', 'aniyuli@gmail.com');
+(2, 'Ani Yulianti', '081234567891', 'Jl. Sudirman No. 2, Jakarta 2', 'aniyuli@gmail.com'),
+(6, 'Renasya', '089347009002', 'Jl Batara', 'renasyaa@gmail.com'),
+(7, 'Desti', '082106892022', 'Jl Peta', 'destii@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -138,7 +147,12 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tanggal`, `total_pembe
 (1, 0, '2024-05-15 14:30:00', 3500000, 500000, 7000000, 'Pembelian Laptop untuk kantor'),
 (2, 0, '2024-05-15 15:00:00', 2300000, 200000, 2500000, 'Pembelian Laptop pribadi'),
 (26, 2, '2024-06-02 13:42:00', 4300000, 700000, 5000000, 'asfasfasfasfasf13'),
-(27, 2, '2024-06-02 18:43:00', 6600000, 3400000, 10000000, 'asfasgafs g a');
+(27, 2, '2024-06-02 18:43:00', 6600000, 3400000, 10000000, 'asfasgafs g a'),
+(28, 1, '2024-06-02 18:52:00', 2000000, 3000000, 5000000, 'ds'),
+(30, 2, '2024-06-02 21:28:00', 6000000, 0, 6000000, 'buat kuliah'),
+(31, 2, '2024-06-03 07:13:00', 6600000, 3400000, 10000000, 'Untuk keperluan kuliah'),
+(32, 2, '2024-06-03 12:43:00', 2500000, 0, 2500000, 'untuk kantor'),
+(33, 1, '2024-06-03 18:05:00', 4000000, 1000000, 5000000, 'untuk kantp');
 
 --
 -- Indexes for dumped tables
@@ -191,25 +205,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Constraints for dumped tables

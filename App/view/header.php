@@ -1,7 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <a class="navbar-brand brand-logo d-flex align-items-center" href="index.html" style="justify-content: flex-start; text-align: left;">
-          <img src="../assets/images/logo.jpeg" alt="logo" style="width: 50px; height: 50px; margin: 10px; " style="justify-content: flex-start; text-align: left;">
+          <img src="../assets/images/logo.jpeg" alt="logo" style="width: 50px; height: 50px; margin: 10px; justify-content: flex-start; text-align: left; border-radius: 50%; ">
           <div class="d-flex flex-column">
             <h5 style="margin: 0; font-size: 1.3rem;">DigitalDream</h5>
             

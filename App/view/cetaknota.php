@@ -79,7 +79,7 @@
 <body>
     <div class="nota">
         <div class="logo">
-            <img src="../assets/images/logo.jpeg" alt="logo">
+            <img src="../assets/images/logo.jpeg" alt="logo" style="border-radius: 50%;">
         </div>
         <h1>DigitalDream Laptop</h1>
         <p>Alamat: Jl. Waydream No.127, Kota Neo City Teknologi</p>
